@@ -6,19 +6,20 @@
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:padding="16dp"
-    app:strokeColor="#FF6F00"
+    app:strokeColor="#F57C00"
     app:strokeWidth="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp">
+        android:layout_height="wrap_content">
 
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:text="10 AM"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +29,9 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22"
+            android:layout_marginStart="12dp"
+            android:text="29"
+            android:textColor="#ED7D2D"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +41,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
             android:text="Dec 2022"
             app:layout_constraintBottom_toTopOf="@+id/textView7"
             app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
             android:text="Do : some task"
             app:layout_constraintStart_toEndOf="@+id/textView4"
             app:layout_constraintTop_toTopOf="parent" />
@@ -65,8 +71,11 @@
             android:id="@+id/textView7"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="#F57C00"
             android:gravity="center_horizontal"
             android:text="1 hour left"
+            android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
