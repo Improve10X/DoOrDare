@@ -26,7 +26,6 @@ public class PastFragment extends Fragment {
         setData();
         setupPastTasksAdapter();
         setupPastTasksRv();
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 

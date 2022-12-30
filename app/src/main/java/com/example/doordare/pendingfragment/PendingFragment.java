@@ -26,7 +26,6 @@ public class PendingFragment extends Fragment {
         setupData();
         setupPendingsAdapter();
         setupPendingTasksRv();
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 

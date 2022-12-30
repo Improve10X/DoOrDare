@@ -26,7 +26,6 @@ public class UpcomingFragment extends Fragment {
         setupData();
         setupUpcomingTasksAdapter();
         setupUpcomingTasksRv();
-        // Inflate the layout for this fragment
         return binding.getRoot();
     }
 
