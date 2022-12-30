@@ -28,22 +28,27 @@ public class AddTaskActivity extends AppCompatActivity {
 
     private void handleSaveBtn() {
         binding.saveBtn.setOnClickListener(view -> {
-            String task = binding.doTxt.getText().toString();
-            String dare = binding.dareTxt.getText().toString();
-            String deadline = binding.deadlineTxt.getText().toString();
-            addTask(task, dare, deadline);
+            String doTitle = binding.doTxt.getText().toString();
+            String dareTitle = binding.dareTxt.getText().toString();
+            long deadline = 1672486200000L; //binding.deadlineTxt.getText().toString();
+            addTask(doTitle, dareTitle, deadline);
         });
     }
 
-    private void addTask(String task, String dare, String deadline) {
-        PendingTask pendingTask = new PendingTask();
-        pendingTask.task = task;
-        pendingTask.dare = dare;
-        pendingTask.time = deadline;
-
+    private void addTask(String doTitle, String dareTitle, long deadline) {
+        Task task = new Task();
+        task.doItem = new Do();
+        task.doItem.title = doTitle;
+        task.doItem.status = "Pending";
+        task.doItem.deadlineTimestamp = deadline;
+        task.dare = new Dare();
+        task.dare.title = dareTitle;
+        task.dare.status = "Not Needed";
+        task.createdTimestamp = System.currentTimeMillis();
+        task.status = "Upcoming";
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
-                .add(pendingTask)
+                .add(task)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {

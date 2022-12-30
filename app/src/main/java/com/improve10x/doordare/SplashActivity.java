@@ -31,7 +31,8 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             } else {
-                Intent intent = new Intent(this, LoginActivity.class);
+                // TODO : redirect to login
+                Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
