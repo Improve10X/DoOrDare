@@ -12,12 +12,13 @@ import com.improve10x.doordare.databinding.PendingItemBinding;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHolder> {
 
-    private ArrayList<Task> tasks;
+    private List<Task> tasks;
 
-    void setData(ArrayList<Task> tasks) {
+    void setData(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
     }
@@ -47,11 +48,11 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
         // TODO : need to calculate the time left for do
-        holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
+        //holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
     }
 
     @Override
     public int getItemCount() {
-        return pendings.size();
+        return tasks.size();
     }
 }

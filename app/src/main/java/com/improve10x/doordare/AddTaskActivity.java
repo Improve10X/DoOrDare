@@ -11,7 +11,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
-import com.improve10x.doordare.pendingfragment.PendingTask;
 
 public class AddTaskActivity extends AppCompatActivity {
 
