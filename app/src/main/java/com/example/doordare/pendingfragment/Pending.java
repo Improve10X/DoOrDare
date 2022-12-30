@@ -1,4 +1,4 @@
-package com.example.doordare;
+package com.example.doordare.pendingfragment;
 
 public class Pending {
 

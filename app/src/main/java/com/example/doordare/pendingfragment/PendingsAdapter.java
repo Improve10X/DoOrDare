@@ -1,4 +1,4 @@
-package com.example.doordare;
+package com.example.doordare.pendingfragment;
 
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -16,6 +16,7 @@ public class PendingsAdapter extends RecyclerView.Adapter<PendingViewHolder> {
 
     void setData(ArrayList<Pending> pendings) {
         this.pendings = pendings;
+        notifyDataSetChanged();
     }
 
     @NonNull

@@ -1,8 +1,7 @@
-package com.example.doordare;
+package com.example.doordare.pendingfragment;
 
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.doordare.databinding.FragmentPastBinding;
 import com.example.doordare.databinding.FragmentPendingBinding;
 
 import java.util.ArrayList;

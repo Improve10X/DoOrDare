@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.doordare.R;
+
 public class PastFragment extends Fragment {
 
     @Override
