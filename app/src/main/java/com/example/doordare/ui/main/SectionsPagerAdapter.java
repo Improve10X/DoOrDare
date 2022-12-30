@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.doordare.PastFragment;
+import com.example.doordare.pastfragment.PastFragment;
 import com.example.doordare.pendingfragment.PendingFragment;
 import com.example.doordare.upcomingfragment.UpcomingFragment;
 

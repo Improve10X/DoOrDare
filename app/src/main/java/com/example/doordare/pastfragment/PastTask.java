@@ -1,6 +1,6 @@
-package com.example.doordare.pendingfragment;
+package com.example.doordare.pastfragment;
 
-public class Pending {
+public class PastTask {
 
     public String id;
     public String time;
@@ -10,10 +10,10 @@ public class Pending {
     public String dare;
     public String reducedTime;
 
-    public Pending() {
+    public PastTask() {
     }
 
-    public Pending(String id, String task, String dare, String time, String date, String monthAndYear, String reducedTime) {
+    public PastTask(String id, String task, String dare, String time, String date, String monthAndYear, String reducedTime) {
         this.id = id;
         this.task = task;
         this.dare = dare;

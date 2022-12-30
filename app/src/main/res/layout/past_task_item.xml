@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="12dp"
+    android:layout_marginTop="16dp"
+    android:layout_marginRight="12dp"
+    app:strokeColor="#00BD00"
+    app:strokeWidth="4dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/time_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:text="10 AM"
+            app:layout_constraintEnd_toEndOf="@+id/month_and_year_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/date_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="29"
+            android:textColor="#ED7D2D"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="@+id/month_and_year_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time_txt" />
+
+        <TextView
+            android:id="@+id/month_and_year_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="12dp"
+            android:text="Dec 2022"
+            app:layout_constraintBottom_toTopOf="@+id/reduced_time_txt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/date_txt" />
+
+        <TextView
+            android:id="@+id/task_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:text="Do : some task"
+            app:layout_constraintStart_toEndOf="@+id/month_and_year_txt"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/dare_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dare : some dare"
+            app:layout_constraintBottom_toTopOf="@+id/reduced_time_txt"
+            app:layout_constraintStart_toStartOf="@+id/task_txt"
+            app:layout_constraintTop_toBottomOf="@+id/task_txt" />
+
+        <TextView
+            android:id="@+id/reduced_time_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:background="#00BD00"
+            android:gravity="center_horizontal"
+            android:text="1 hour left"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
