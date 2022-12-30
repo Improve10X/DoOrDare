@@ -31,7 +31,7 @@ public class PendingFragment extends Fragment {
 
     private void setupPendingsAdapter() {
         pendingTasksAdapter = new PendingTasksAdapter();
-        pendingTasksAdapter.setData(pendingTasks);
+        pendingTasksAdapter.setData(tasks);
     }
 
     private void setupPendingTasksRv() {
