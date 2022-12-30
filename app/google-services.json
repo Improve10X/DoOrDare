@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "367947162564",
+    "project_id": "doordare-49dd8",
+    "storage_bucket": "doordare-49dd8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:367947162564:android:9f02cf25a77691351ffa91",
+        "android_client_info": {
+          "package_name": "com.improve10x.doordare"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "367947162564-q3kfkhul85lfap8u17kk4c8cjrg0rqfn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.improve10x.doordare",
+            "certificate_hash": "07f21a3f2d4deedafdeb720b6fe51e57c9c1177b"
+          }
+        },
+        {
+          "client_id": "367947162564-asqpvni03k15rhi7j993u55s35ag5t15.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBD3yZyDSIX0FGzS-U1FMHdN-3SFtOf16U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "367947162564-asqpvni03k15rhi7j993u55s35ag5t15.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
