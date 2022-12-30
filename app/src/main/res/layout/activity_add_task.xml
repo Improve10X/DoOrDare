@@ -20,8 +20,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Do"
-            android:text="Sriraghu" />
+            android:hint="Do" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -38,8 +37,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Dare"
-            android:text="Rajesh" />
+            android:hint="Dare" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,8 +53,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Past"
-            android:text="Om Prakash" />
+            android:hint="Deadline" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
