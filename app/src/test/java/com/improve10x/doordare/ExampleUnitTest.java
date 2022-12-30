@@ -23,8 +23,8 @@ public class ExampleUnitTest {
         long timestamp = 1672486200000L;//System.currentTimeMillis();
         Date date = new Date(timestamp);
         SimpleDateFormat format = new SimpleDateFormat("dd MMM yyyy hh:mm:ss aa");
-        String dateStr = format.format(date);
+        String dateText = format.format(date);
         System.out.println(timestamp);
-        System.out.println(dateStr);
+        System.out.println(dateText);
     }
 }
