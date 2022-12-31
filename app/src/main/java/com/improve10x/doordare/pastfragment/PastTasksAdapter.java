@@ -6,16 +6,19 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.improve10x.doordare.Task;
 import com.improve10x.doordare.databinding.PastTaskItemBinding;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
 
-    private ArrayList<PastTask> pastTasks;
+    private List<Task> tasks;
 
-    void setData(ArrayList<PastTask> pastTasks) {
-        this.pastTasks = pastTasks;
+    void setData(List<Task> tasks) {
+        this.tasks = tasks;
         notifyDataSetChanged();
     }
 
@@ -29,17 +32,26 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull PastTaskViewHolder holder, int position) {
-        PastTask pastTask = pastTasks.get(position);
-        holder.binding.timeTxt.setText(pastTask.time);
-        holder.binding.dateTxt.setText(pastTask.date);
-        holder.binding.monthAndYearTxt.setText(pastTask.monthAndYear);
-        holder.binding.taskTxt.setText(pastTask.task);
-        holder.binding.dareTxt.setText(pastTask.dare);
-        holder.binding.reducedTimeTxt.setText(pastTask.reducedTime);
+        Task task = tasks.get(position);
+        holder.binding.taskTxt.setText(task.doItem.title);
+        holder.binding.dareTxt.setText(task.dare.title);
+        long doTimestamp = task.doItem.deadlineTimestamp;
+        Date date = new Date(doTimestamp);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
+        String timeText = timeFormat.format(date);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+        String dateText = dateFormat.format(date);
+        SimpleDateFormat monthYearFormat = new SimpleDateFormat("MMM yyyy");
+        String monthYear = monthYearFormat.format(date);
+        holder.binding.timeTxt.setText(timeText);
+        holder.binding.dateTxt.setText(dateText);
+        holder.binding.monthAndYearTxt.setText(monthYear);
+        // TODO : need to calculate the time left for do
+        //holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
     }
 
     @Override
     public int getItemCount() {
-        return pastTasks.size();
+        return tasks.size();
     }
 }
