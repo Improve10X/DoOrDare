@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.doordare.Constants;
 import com.improve10x.doordare.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentPastBinding;
@@ -53,14 +54,14 @@ public class PastFragment extends Fragment {
         pastTasksAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Task task) {
-                itemClicked();
+                itemClicked(task);
             }
         });
     }
 
-    private void itemClicked() {
+    private void itemClicked(Task task) {
         Intent intent = new Intent(getActivity(), TaskDetailsActivity.class);
-        //intent.putExtra("task", task);
+        intent.putExtra(Constants.KEY_TASK, task);
         startActivity(intent);
     }
 
