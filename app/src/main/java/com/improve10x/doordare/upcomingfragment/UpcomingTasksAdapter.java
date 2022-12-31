@@ -1,5 +1,6 @@
 package com.improve10x.doordare.upcomingfragment;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -7,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.doordare.Task;
+import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.UpcomingTaskItemBinding;
 
 import java.text.SimpleDateFormat;
