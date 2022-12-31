@@ -6,14 +6,26 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
+
+import java.util.Date;
+
+import javax.annotation.concurrent.ThreadSafe;
+
 public class TaskDetailsActivity extends AppCompatActivity {
+
+    private Task task;
+    private ActivityTaskDetailsBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_task_details);
+        binding = ActivityTaskDetailsBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Task Details");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        task = (Task) getIntent().getSerializableExtra(Constants.KEY_TASK);
+        showData();
     }
 
     @Override
@@ -24,5 +36,15 @@ public class TaskDetailsActivity extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showData() {
+        binding.doTxt.setText(task.doItem.title);
+        binding.dareTxt.setText(task.dare.title);
+        long deadline = task.doItem.deadlineTimestamp;
+        Date date = new Date(deadline);
+        String deadlineStr = String.valueOf(date);
+        binding.deadlineTxt.setText(deadlineStr);
+        binding.statusTxt.setText(task.status);
     }
 }
