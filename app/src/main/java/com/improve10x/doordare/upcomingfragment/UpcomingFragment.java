@@ -51,6 +51,7 @@ public class UpcomingFragment extends Fragment {
     }
 
     private void fetchData() {
+        showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
                 .get()
@@ -58,10 +59,19 @@ public class UpcomingFragment extends Fragment {
                     @Override
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
+                            hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
                             upcomingTasksAdapter.setData(tasks);
                         }
                     }
                 });
+    }
+
+    private void showProgressBar() {
+        binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar() {
+        binding.progressBar.setVisibility(View.GONE);
     }
 }
