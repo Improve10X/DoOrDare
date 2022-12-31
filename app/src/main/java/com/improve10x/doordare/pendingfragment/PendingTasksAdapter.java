@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.doordare.Task;
 import com.improve10x.doordare.databinding.PendingItemBinding;
+import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,10 +18,15 @@ import java.util.List;
 public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHolder> {
 
     private List<Task> tasks;
+    private OnItemActionListener onItemActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
+    }
+
+    void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @NonNull
@@ -47,8 +53,13 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.timeTxt.setText(timeText);
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
-        // TODO : need to calculate the time left for do
-        //holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(task);
+        });
+        long currentTimeInMillis = System.currentTimeMillis();
+        long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
+        String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
+        holder.binding.reducedTimeTxt.setText(timeLeft + "left");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.improve10x.doordare.pendingfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.HomeActivity;
 import com.improve10x.doordare.Task;
+import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentPendingBinding;
 
 import java.util.ArrayList;
@@ -45,6 +47,18 @@ public class PendingFragment extends Fragment {
     private void setupPendingTasksAdapter() {
         pendingTasksAdapter = new PendingTasksAdapter();
         pendingTasksAdapter.setData(tasks);
+        pendingTasksAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Task task) {
+                itemClicked();
+            }
+        });
+    }
+
+    private void itemClicked() {
+        Intent intent = new Intent(getActivity(), TaskDetailsActivity.class);
+        //intent.putExtra("task", task);
+        startActivity(intent);
     }
 
     private void setupPendingTasksRv() {
