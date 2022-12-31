@@ -2,6 +2,7 @@ package com.improve10x.doordare.upcomingfragment;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -9,13 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.doordare.Task;
 import com.improve10x.doordare.databinding.FragmentUpcomingBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpcomingFragment extends Fragment {
 
-    private ArrayList<UpcomingTask> upcomingTasks;
+    private ArrayList<Task> tasks = new ArrayList<>();
     private FragmentUpcomingBinding binding;
     private UpcomingTasksAdapter upcomingTasksAdapter;
 
@@ -23,29 +29,39 @@ public class UpcomingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentUpcomingBinding.inflate(getLayoutInflater());
-        setupData();
         setupUpcomingTasksAdapter();
         setupUpcomingTasksRv();
         return binding.getRoot();
     }
 
-    private void setupData() {
-        upcomingTasks = new ArrayList<>();
-        UpcomingTask upcomingTask = new UpcomingTask("2", "Do : some task", "Dare : some dare", "10Am", "29", "dec, 2022", "1 day left");
-        upcomingTasks.add(upcomingTask);
-        upcomingTasks.add(upcomingTask);
-        upcomingTasks.add(upcomingTask);
-        upcomingTasks.add(upcomingTask);
-        upcomingTasks.add(upcomingTask);
+    @Override
+    public void onResume() {
+        super.onResume();
+        fetchData();
     }
 
     private void setupUpcomingTasksAdapter() {
         upcomingTasksAdapter = new UpcomingTasksAdapter();
-        upcomingTasksAdapter.setData(upcomingTasks);
+        upcomingTasksAdapter.setData(tasks);
     }
 
     private void setupUpcomingTasksRv() {
         binding.upcomingTasksRv.setLayoutManager(new LinearLayoutManager(getActivity()));
         binding.upcomingTasksRv.setAdapter(upcomingTasksAdapter);
+    }
+
+    private void fetchData() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("tasks")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<Task> tasks = task.getResult().toObjects(Task.class);
+                            upcomingTasksAdapter.setData(tasks);
+                        }
+                    }
+                });
     }
 }
