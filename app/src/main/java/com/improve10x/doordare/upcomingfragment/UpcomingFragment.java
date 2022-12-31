@@ -1,5 +1,6 @@
 package com.improve10x.doordare.upcomingfragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.Task;
+import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentUpcomingBinding;
 
 import java.util.ArrayList;
@@ -43,6 +45,18 @@ public class UpcomingFragment extends Fragment {
     private void setupUpcomingTasksAdapter() {
         upcomingTasksAdapter = new UpcomingTasksAdapter();
         upcomingTasksAdapter.setData(tasks);
+        upcomingTasksAdapter.setOnItemActionListener(new OnItemActionListener() {
+            @Override
+            public void onItemClicked(Task task) {
+                itemClicked();
+            }
+        });
+    }
+
+    private void itemClicked() {
+        Intent intent = new Intent(getActivity(), TaskDetailsActivity.class);
+        //intent.putExtra("task", task);
+        startActivity(intent);
     }
 
     private void setupUpcomingTasksRv() {

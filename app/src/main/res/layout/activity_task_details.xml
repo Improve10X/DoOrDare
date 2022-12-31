@@ -120,32 +120,17 @@
                 android:adjustViewBounds="true"
                 app:srcCompat="@drawable/unnamed" />
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/inform_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ED7D2D "
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/tickmark_img"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:adjustViewBounds="true"
-                    android:paddingLeft="28dp"
-                    app:srcCompat="@drawable/check_157822__340_removebg_preview" />
-
-                <TextView
-                    android:id="@+id/inform_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:padding="20dp"
-                    android:text="You have successfully  completed your task"
-                    android:textColor="#FFFFFF"
-                    android:textSize="20sp"
-                    android:textStyle="normal" />
-            </LinearLayout>
+                android:background="#ED7D2D"
+                android:gravity="center"
+                android:padding="20dp"
+                android:text="You have successfully  completed your task"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:textStyle="normal" />
 
         </LinearLayout>
 

@@ -17,10 +17,15 @@ import java.util.List;
 public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHolder> {
 
     private List<Task> tasks;
+    private OnItemActionListener onItemActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
+    }
+
+    void setOnItemActionListener(OnItemActionListener onItemActionListener) {
+        this.onItemActionListener = onItemActionListener;
     }
 
     @NonNull
@@ -49,6 +54,9 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.monthAndYearTxt.setText(monthYear);
         // TODO : need to calculate the time left for do
         //holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(task);
+        });
     }
 
     @Override
