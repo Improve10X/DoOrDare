@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.Constants;
 import com.improve10x.doordare.Task;
@@ -69,6 +70,7 @@ public class PastFragment extends Fragment {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
+                .orderBy("createdTimestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
