@@ -41,12 +41,25 @@ public class AddTaskActivity extends AppCompatActivity {
         binding.saveBtn.setOnClickListener(view -> {
             String doTitle = binding.doTxt.getText().toString();
             String dareTitle = binding.dareTxt.getText().toString();
-            long deadline = 1672486200000L; //binding.deadlineTxt.getText().toString();
-            String deadlineTxt = String.valueOf(deadline);
-            if(doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == false) {
-                addTask(doTitle, dareTitle, deadline);
+            String deadlineTxt = binding.deadlineTxt.getText().toString();
+            long dummyDeadline = 1672486200000L;
+            if (doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == false) {
+                addTask(doTitle, dareTitle, dummyDeadline);
+                finish();
+            } else if (doTitle.equals("") == false && dareTitle.equals("") == true && deadlineTxt.equals("") == true) {
+                Toast.makeText(this, "Fill Dare and Deadline", Toast.LENGTH_SHORT).show();
+            } else if (doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == true) {
+                Toast.makeText(this, "Fill Deadline", Toast.LENGTH_SHORT).show();
+            } else if (doTitle.equals("") == false && deadlineTxt.equals("") == false && dareTitle.equals("") == true) {
+                Toast.makeText(this, "Fill Dare", Toast.LENGTH_SHORT).show();
+            } else if (dareTitle.equals("") == false && doTitle.equals("") == true && deadlineTxt.equals("") == true) {
+                Toast.makeText(this, "Fill Do and Deadline", Toast.LENGTH_SHORT).show();
+            } else if (dareTitle.equals("") == false && deadlineTxt.equals("") == false && doTitle.equals("") == true) {
+                Toast.makeText(this, "Fill the Do", Toast.LENGTH_SHORT).show();
+            } else if (deadlineTxt.equals("") == false && doTitle.equals("") == true && dareTitle.equals("") == true) {
+                Toast.makeText(this, "Fill the Do and dare", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Fill all the data ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Fill Do, Dare and deadline", Toast.LENGTH_SHORT).show();
             }
         });
     }
