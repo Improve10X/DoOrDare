@@ -40,8 +40,8 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PastTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
-        holder.binding.taskTxt.setText(task.doItem.title);
-        holder.binding.dareTxt.setText(task.dare.title);
+        holder.binding.taskTxt.setText("Do : " + task.doItem.title);
+        holder.binding.dareTxt.setText("Dare : " + task.dare.title);
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
