@@ -16,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.doordare.AddTaskActivity;
 import com.improve10x.doordare.Constants;
 import com.improve10x.doordare.HomeActivity;
 import com.improve10x.doordare.OnItemActionListener;
@@ -38,6 +39,7 @@ public class PendingFragment extends Fragment {
         binding = FragmentPendingBinding.inflate(getLayoutInflater());
         setupPendingTasksAdapter();
         setupPendingTasksRv();
+        handleFab();
         return binding.getRoot();
     }
 
@@ -87,6 +89,13 @@ public class PendingFragment extends Fragment {
                 });
     }
 
+    private void handleFab() {
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), AddTaskActivity.class);
+            startActivity(intent);
+        });
+    }
+
     private void showProgressBar() {
         binding.progressBar.setVisibility(View.VISIBLE);
     }
@@ -95,3 +104,4 @@ public class PendingFragment extends Fragment {
         binding.progressBar.setVisibility(View.GONE);
     }
 }
+

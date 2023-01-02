@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.improve10x.doordare.AddTaskActivity;
 import com.improve10x.doordare.Constants;
 import com.improve10x.doordare.OnItemActionListener;
 import com.improve10x.doordare.Task;
@@ -36,6 +37,7 @@ public class UpcomingFragment extends Fragment {
         binding = FragmentUpcomingBinding.inflate(getLayoutInflater());
         setupUpcomingTasksAdapter();
         setupUpcomingTasksRv();
+        handleFab();
         return binding.getRoot();
     }
 
@@ -83,6 +85,13 @@ public class UpcomingFragment extends Fragment {
                         }
                     }
                 });
+    }
+
+    private void handleFab() {
+        binding.fab.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), AddTaskActivity.class);
+            startActivity(intent);
+        });
     }
 
     private void showProgressBar() {
