@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.improve10x.doordare.OnItemActionListener;
 import com.improve10x.doordare.Task;
 import com.improve10x.doordare.databinding.UpcomingTaskItemBinding;
+import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,11 +53,13 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         holder.binding.timeTxt.setText(timeText);
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
-        // TODO : need to calculate the time left for do
-        //holder.binding.reducedTimeTxt.setText(pendingTask.reducedTime);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
+        long currentTimeInMillis = System.currentTimeMillis();
+        long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
+        String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
+        holder.binding.reducedTimeTxt.setText(timeLeft + "left");
     }
 
     @Override
