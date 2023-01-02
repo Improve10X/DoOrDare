@@ -63,7 +63,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         if (timeLeft.isEmpty() == false) {
             holder.binding.reducedTimeTxt.setText(timeLeft + "left");
         } else {
-            holder.binding.reducedTimeTxt.setText("'Do' time is over");
+            holder.binding.reducedTimeTxt.setText("'Do' not completed 'Dare' needed");
         }
     }
 
