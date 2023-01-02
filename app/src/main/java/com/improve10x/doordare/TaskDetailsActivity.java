@@ -6,8 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
+import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 
@@ -27,7 +32,6 @@ public class TaskDetailsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         task = (Task) getIntent().getSerializableExtra(Constants.KEY_TASK);
         showData();
-        handleTaskCompletedBtn();
     }
 
     @Override
@@ -49,16 +53,48 @@ public class TaskDetailsActivity extends AppCompatActivity {
         binding.deadlineTxt.setText(deadlineStr);
         binding.statusTxt.setText(task.status);
         if (task.status.equalsIgnoreCase("Pending")) {
-            binding.doCompletedBtn.setVisibility(View.VISIBLE);
-            binding.materialCardView.setVisibility(View.GONE);
+            pending();
+        } else if (task.status.equalsIgnoreCase("Do Completed")) {
+            doCompleted();
         }
+    }
+
+    private void pending() {
+        binding.doCompletedBtn.setVisibility(View.VISIBLE);
+        binding.materialCardView.setVisibility(View.GONE);
+        handleTaskCompletedBtn();
+    }
+
+    private void doCompleted() {
+        binding.materialCardView.setVisibility(View.VISIBLE);
+        binding.statusTxt.setText("Do Completed");
+        Picasso.get().load("https://lh4.googleusercontent.com/proxy/rwcYSyNHPdrUh70BGjqH9bNpQzMphBVK52yd8xkGlmvGe88XvtxHMf6WbFNLa7-m8TxjfNpywo9rBYnef1T2joyl3W8n6qSiLbm6e_BIAzrq9GDzlZnw9caLboxKgqrg5c80zD6i68eXisTUBQ").into(binding.wishesImg);
+        binding.informTxt.setText("You have successfully completed your task");
     }
 
     private void handleTaskCompletedBtn() {
         binding.doCompletedBtn.setOnClickListener(view -> {
+            task.doItem.status = "Completed";
+            task.status = "Do Completed";
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("tasks").document(task.id)
+                    .set(task)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
+                        }
+                    });
             binding.materialCardView.setVisibility(View.VISIBLE);
             binding.doCompletedBtn.setVisibility(View.GONE);
-            binding.statusTxt.setText("Do completed");
+            binding.informTxt.setText("You have successfully completed your task");
+            Picasso.get().load("https://lh4.googleusercontent.com/proxy/rwcYSyNHPdrUh70BGjqH9bNpQzMphBVK52yd8xkGlmvGe88XvtxHMf6WbFNLa7-m8TxjfNpywo9rBYnef1T2joyl3W8n6qSiLbm6e_BIAzrq9GDzlZnw9caLboxKgqrg5c80zD6i68eXisTUBQ").into(binding.wishesImg);
         });
     }
 }

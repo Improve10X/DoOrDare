@@ -106,7 +106,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_txt"
         app:strokeColor="#ED7D2D "
-        app:strokeWidth="4dp">
+        app:strokeWidth="4dp"
+        tools:visibility="visible">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,7 +120,7 @@
                 android:layout_height="160dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
-                app:srcCompat="@drawable/unnamed" />
+                app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
                 android:id="@+id/inform_txt"
@@ -128,7 +129,7 @@
                 android:background="#ED7D2D"
                 android:gravity="center"
                 android:padding="20dp"
-                android:text="You have successfully  completed your task"
+                android:text="You haven't completed the &quot;Do&quot; task 🙆🏻‍♂️, so Dare needs to be completed🤷🏻‍♂️"
                 android:textColor="#FFFFFF"
                 android:textSize="20sp"
                 android:textStyle="normal" />
