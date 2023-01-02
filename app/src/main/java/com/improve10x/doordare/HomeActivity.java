@@ -36,7 +36,6 @@ public class HomeActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = binding.tabs;
         tabs.setupWithViewPager(viewPager);
-        handleFab();
     }
 
     @Override
@@ -62,12 +61,5 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             return super.onOptionsItemSelected(item);
         }
-    }
-
-    private void handleFab() {
-        binding.fab.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddTaskActivity.class);
-            startActivity(intent);
-        });
     }
 }
