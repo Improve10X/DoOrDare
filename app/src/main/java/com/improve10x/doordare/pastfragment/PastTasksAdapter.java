@@ -56,10 +56,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
-        long currentTimeInMillis = System.currentTimeMillis();
-        long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
-        String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
-        holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+        holder.binding.reducedTimeTxt.setText("Completed");
     }
 
     @Override

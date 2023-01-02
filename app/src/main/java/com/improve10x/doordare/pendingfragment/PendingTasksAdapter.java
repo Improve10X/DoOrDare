@@ -60,7 +60,11 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
-        holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+        if (timeLeft.isEmpty() == false) {
+            holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+        } else {
+            holder.binding.reducedTimeTxt.setText("'Do' time is over");
+        }
     }
 
     @Override
