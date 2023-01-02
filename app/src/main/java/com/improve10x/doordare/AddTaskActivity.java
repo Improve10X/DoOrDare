@@ -42,7 +42,12 @@ public class AddTaskActivity extends AppCompatActivity {
             String doTitle = binding.doTxt.getText().toString();
             String dareTitle = binding.dareTxt.getText().toString();
             long deadline = 1672486200000L; //binding.deadlineTxt.getText().toString();
-            addTask(doTitle, dareTitle, deadline);
+            String deadlineTxt = String.valueOf(deadline);
+            if(doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == false) {
+                addTask(doTitle, dareTitle, deadline);
+            } else {
+                Toast.makeText(this, "Fill all the data ", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
