@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
 import com.improve10x.doordare.Constants;
@@ -80,9 +82,14 @@ public class PendingFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
+                        hideProgressBar();
                         if (task.isSuccessful()) {
-                            hideProgressBar();
-                            List<Task> tasks = task.getResult().toObjects(Task.class);
+                            List<Task> tasks = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Task taskItem = document.toObject(Task.class);
+                                taskItem.id = document.getId();
+                                tasks.add(taskItem);
+                            }
                             pendingTasksAdapter.setData(tasks);
                         }
                     }
