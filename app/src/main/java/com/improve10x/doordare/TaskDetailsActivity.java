@@ -56,6 +56,10 @@ public class TaskDetailsActivity extends AppCompatActivity {
             pending();
         } else if (task.status.equalsIgnoreCase("Do Completed")) {
             doCompleted();
+        } else if (task.status.equalsIgnoreCase("'Do' not completed")) {
+            doNotCompletedStatus();
+        } else if (task.status.equalsIgnoreCase("Dare Completed")) {
+            dareCompletedStatus();
         }
     }
 
@@ -67,9 +71,24 @@ public class TaskDetailsActivity extends AppCompatActivity {
 
     private void doCompleted() {
         binding.materialCardView.setVisibility(View.VISIBLE);
-        binding.statusTxt.setText("Do Completed");
+        binding.doCompletedBtn.setVisibility(View.GONE);
         Picasso.get().load("https://lh4.googleusercontent.com/proxy/rwcYSyNHPdrUh70BGjqH9bNpQzMphBVK52yd8xkGlmvGe88XvtxHMf6WbFNLa7-m8TxjfNpywo9rBYnef1T2joyl3W8n6qSiLbm6e_BIAzrq9GDzlZnw9caLboxKgqrg5c80zD6i68eXisTUBQ").into(binding.wishesImg);
         binding.informTxt.setText("You have successfully completed your task");
+    }
+
+    private void doNotCompletedStatus() {
+        binding.materialCardView.setVisibility(View.VISIBLE);
+        Picasso.get().load("https://www.linkpicture.com/q/unnamed_28.png").into(binding.wishesImg);
+        binding.informTxt.setText("You haven't completed the 'Do' task \uD83D\uDE46\uD83C\uDFFB\u200D♂️, so 'Dare' needs to be completed\uD83E\uDD37\uD83C\uDFFB\u200D♂️");
+        binding.dareCompletedBtn.setVisibility(View.VISIBLE);
+        handleDareCompletedBtn();
+    }
+
+    private void dareCompletedStatus() {
+        binding.materialCardView.setVisibility(View.VISIBLE);
+        binding.dareCompletedBtn.setVisibility(View.GONE);
+        binding.informTxt.setText("If you know you can do better.. then do better.");
+        Picasso.get().load("https://lh4.googleusercontent.com/proxy/OwzUIh7P-Thx34_WKd5bwJfn0hLRmSVUK3nb3I-ZIcuQ9EHnXZN6-tYbHC-lP_NJD4mNHuUAtcJXQYIfky8WrUM1zvDvEPtbFF6vGwbEg-4z").into(binding.wishesImg);
     }
 
     private void handleTaskCompletedBtn() {
@@ -91,10 +110,28 @@ public class TaskDetailsActivity extends AppCompatActivity {
                             Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
                         }
                     });
-            binding.materialCardView.setVisibility(View.VISIBLE);
-            binding.doCompletedBtn.setVisibility(View.GONE);
-            binding.informTxt.setText("You have successfully completed your task");
-            Picasso.get().load("https://lh4.googleusercontent.com/proxy/rwcYSyNHPdrUh70BGjqH9bNpQzMphBVK52yd8xkGlmvGe88XvtxHMf6WbFNLa7-m8TxjfNpywo9rBYnef1T2joyl3W8n6qSiLbm6e_BIAzrq9GDzlZnw9caLboxKgqrg5c80zD6i68eXisTUBQ").into(binding.wishesImg);
+        });
+    }
+
+    private void handleDareCompletedBtn() {
+        binding.dareCompletedBtn.setOnClickListener(view -> {
+            task.dare.status = "completed";
+            task.status = "Dare Completed";
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                db.collection("tasks").document(task.id)
+                        .set(task)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
+                            }
+                        });
         });
     }
 }
