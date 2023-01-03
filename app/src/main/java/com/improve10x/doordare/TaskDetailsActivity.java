@@ -93,22 +93,7 @@ public class TaskDetailsActivity extends AppCompatActivity {
         binding.doCompletedBtn.setOnClickListener(view -> {
             task.doItem.status = "Completed";
             task.status = "Do Completed";
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("tasks").document(task.id)
-                    .set(task)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                            showData();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            updateTask(task);
             doCompletedStatus();
         });
     }
@@ -117,23 +102,28 @@ public class TaskDetailsActivity extends AppCompatActivity {
         binding.dareCompletedBtn.setOnClickListener(view -> {
             task.dare.status = "completed";
             task.status = "Dare Completed";
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-                db.collection("tasks").document(task.id)
-                        .set(task)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-                                Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
-                                showData();
-                            }
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                dareCompletedStatus();
+            updateTask(task);
+            dareCompletedStatus();
         });
+    }
+
+    private void updateTask(Task task) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("tasks")
+                .document(task.id)
+                .set(task)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                        showData();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
