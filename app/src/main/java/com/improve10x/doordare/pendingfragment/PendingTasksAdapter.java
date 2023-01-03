@@ -44,7 +44,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.dareTxt.setText("Dare : " + task.dare.title);
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
         String timeText = timeFormat.format(date);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
         String dateText = dateFormat.format(date);
