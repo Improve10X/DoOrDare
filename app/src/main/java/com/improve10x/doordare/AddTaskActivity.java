@@ -75,12 +75,18 @@ public class AddTaskActivity extends AppCompatActivity {
         task.dare.status = "Not Needed";
         task.createdTimestamp = System.currentTimeMillis();
         task.status = "Upcoming";
+        addTask(task);
+    }
+
+    private void addTask(Task task) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+        task.id = db.collection("tasks").document().getId();
         db.collection("tasks")
-                .add(task)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(task.id)
+                .set(task)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
+                    public void onSuccess(Void unused) {
                         Toast.makeText(AddTaskActivity.this, "Successfully Added Task", Toast.LENGTH_SHORT).show();
                         finish();
                     }
