@@ -9,9 +9,11 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
+import com.improve10x.doordare.base.task.Dare;
+import com.improve10x.doordare.base.task.Do;
+import com.improve10x.doordare.base.task.Task;
 
 public class AddTaskActivity extends AppCompatActivity {
 
@@ -74,7 +76,7 @@ public class AddTaskActivity extends AppCompatActivity {
         task.dare.title = dareTitle;
         task.dare.status = "Not Needed";
         task.createdTimestamp = System.currentTimeMillis();
-        task.status = "Upcoming";
+        task.status = "Pending";
         addTask(task);
     }
 
