@@ -6,13 +6,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.doordare.OnItemActionListener;
-import com.improve10x.doordare.Task;
+import com.improve10x.doordare.base.OnItemActionListener;
+import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.PendingItemBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

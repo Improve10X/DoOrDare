@@ -16,9 +16,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
-import com.improve10x.doordare.Constants;
-import com.improve10x.doordare.OnItemActionListener;
-import com.improve10x.doordare.Task;
+import com.improve10x.doordare.base.Constants;
+import com.improve10x.doordare.base.OnItemActionListener;
+import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentUpcomingBinding;
 
