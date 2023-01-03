@@ -129,7 +129,7 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             String timeInMillisStr = String.valueOf(timeInMillis);
             binding.deadlineTxt.setText(timeInMillisStr);
             //FirebaseFirestore db = FirebaseFirestore.getInstance();
-            //task.id = db.collection("tasks").document().getId();
+            //task.doItem.deadlineTimestamp = timeInMillis;
             //db.collection("tasks")
             //        .document(task.id)
             //        .set(task)
