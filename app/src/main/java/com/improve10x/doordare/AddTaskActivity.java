@@ -18,7 +18,7 @@ import com.improve10x.doordare.base.task.Task;
 
 public class AddTaskActivity extends BaseActivity {
 
-    ActivityAddTaskBinding binding;
+    private ActivityAddTaskBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
