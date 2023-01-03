@@ -10,12 +10,13 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
 import com.improve10x.doordare.base.task.Dare;
 import com.improve10x.doordare.base.task.Do;
 import com.improve10x.doordare.base.task.Task;
 
-public class AddTaskActivity extends AppCompatActivity {
+public class AddTaskActivity extends BaseActivity {
 
     ActivityAddTaskBinding binding;
 
@@ -49,19 +50,19 @@ public class AddTaskActivity extends AppCompatActivity {
                 addTask(doTitle, dareTitle, dummyDeadline);
                 finish();
             } else if (doTitle.equals("") == false && dareTitle.equals("") == true && deadlineTxt.equals("") == true) {
-                Toast.makeText(this, "Fill Dare and Deadline", Toast.LENGTH_SHORT).show();
+                showToast("Fill Dare and Deadline");
             } else if (doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == true) {
-                Toast.makeText(this, "Fill Deadline", Toast.LENGTH_SHORT).show();
+                showToast("Fill Deadline");
             } else if (doTitle.equals("") == false && deadlineTxt.equals("") == false && dareTitle.equals("") == true) {
-                Toast.makeText(this, "Fill Dare", Toast.LENGTH_SHORT).show();
+                showToast("Fill Dare");
             } else if (dareTitle.equals("") == false && doTitle.equals("") == true && deadlineTxt.equals("") == true) {
-                Toast.makeText(this, "Fill Do and Deadline", Toast.LENGTH_SHORT).show();
+                showToast("Fill Do and Deadline");
             } else if (dareTitle.equals("") == false && deadlineTxt.equals("") == false && doTitle.equals("") == true) {
-                Toast.makeText(this, "Fill the Do", Toast.LENGTH_SHORT).show();
+                showToast("Fill the Do");
             } else if (deadlineTxt.equals("") == false && doTitle.equals("") == true && dareTitle.equals("") == true) {
-                Toast.makeText(this, "Fill the Do and dare", Toast.LENGTH_SHORT).show();
+                showToast("Fill the Do and dare");
             } else {
-                Toast.makeText(this, "Fill Do, Dare and deadline", Toast.LENGTH_SHORT).show();
+                showToast("Fill Do, Dare and deadline");
             }
         });
     }
@@ -89,14 +90,14 @@ public class AddTaskActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(AddTaskActivity.this, "Successfully Added Task", Toast.LENGTH_SHORT).show();
+                        showToast("Successfully Added Task");
                         finish();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(AddTaskActivity.this, "Failed to Add Task", Toast.LENGTH_SHORT).show();
+                        showToast("Failed to Add Task");
                     }
                 });
     }

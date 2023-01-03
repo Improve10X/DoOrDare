@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
 import com.improve10x.doordare.base.task.Task;
@@ -18,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Date;
 
-public class TaskDetailsActivity extends AppCompatActivity {
+public class TaskDetailsActivity extends BaseActivity {
 
     private Task task;
     private ActivityTaskDetailsBinding binding;
@@ -117,14 +118,14 @@ public class TaskDetailsActivity extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        Toast.makeText(TaskDetailsActivity.this, "Updated", Toast.LENGTH_SHORT).show();
+                        showToast("Updated");
                         showData();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(TaskDetailsActivity.this, "Failed to update", Toast.LENGTH_SHORT).show();
+                        showToast("Failed to update");
                     }
                 });
     }
