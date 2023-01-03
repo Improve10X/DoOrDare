@@ -128,22 +128,5 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             long timeInMillis = calendar.getTimeInMillis();
             String timeInMillisStr = String.valueOf(timeInMillis);
             binding.deadlineTxt.setText(timeInMillisStr);
-            //FirebaseFirestore db = FirebaseFirestore.getInstance();
-            //task.doItem.deadlineTimestamp = timeInMillis;
-            //db.collection("tasks")
-            //        .document(task.id)
-            //        .set(task)
-            //        .addOnSuccessListener(new OnSuccessListener<Void>() {
-            //            @Override
-            //            public void onSuccess(Void unused) {
-            //                showToast("Succeed");
-            //            }
-            //        })
-            //        .addOnFailureListener(new OnFailureListener() {
-            //            @Override
-            //            public void onFailure(@NonNull Exception e) {
-            //                showToast("Failed");
-            //            }
-            //        });
     }
 }
