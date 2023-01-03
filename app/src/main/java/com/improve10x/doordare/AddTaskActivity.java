@@ -3,6 +3,7 @@ package com.improve10x.doordare;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,10 +16,16 @@ import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
 import com.improve10x.doordare.base.task.Dare;
 import com.improve10x.doordare.base.task.Do;
 import com.improve10x.doordare.base.task.Task;
+import com.noowenz.customdatetimepicker.CustomDateTimePicker;
 
-public class AddTaskActivity extends BaseActivity {
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class AddTaskActivity extends BaseActivity implements CustomDateTimePicker.ICustomDateTimeListener {
 
     private ActivityAddTaskBinding binding;
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +34,7 @@ public class AddTaskActivity extends BaseActivity {
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Add Task");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        handleCalendar();
         handleSaveBtn();
     }
 
@@ -45,9 +53,9 @@ public class AddTaskActivity extends BaseActivity {
             String doTitle = binding.doTxt.getText().toString();
             String dareTitle = binding.dareTxt.getText().toString();
             String deadlineTxt = binding.deadlineTxt.getText().toString();
-            long dummyDeadline = 1672486200000L;
+            long deadline = Long.valueOf(deadlineTxt);
             if (doTitle.equals("") == false && dareTitle.equals("") == false && deadlineTxt.equals("") == false) {
-                addTask(doTitle, dareTitle, dummyDeadline);
+                addTask(doTitle, dareTitle, deadline);
                 finish();
             } else if (doTitle.equals("") == false && dareTitle.equals("") == true && deadlineTxt.equals("") == true) {
                 showToast("Fill Dare and Deadline");
@@ -100,5 +108,42 @@ public class AddTaskActivity extends BaseActivity {
                         showToast("Failed to Add Task");
                     }
                 });
+    }
+
+    private void handleCalendar() {
+        binding.calendarBtn.setOnClickListener(view -> {
+            CustomDateTimePicker customDateTimePicker = new CustomDateTimePicker(this, this);
+            customDateTimePicker.setDate(Calendar.getInstance());
+            customDateTimePicker.showDialog();
+        });
+    }
+
+    @Override
+    public void onCancel() {
+
+    }
+
+    @Override
+    public void onSet(@NonNull Dialog dialog, @NonNull Calendar calendar, @NonNull Date date, int i, @NonNull String s, @NonNull String s1, int i1, int i2, @NonNull String s2, @NonNull String s3, int i3, int i4, int i5, int i6, @NonNull String s4) {
+            long timeInMillis = calendar.getTimeInMillis();
+            String timeInMillisStr = String.valueOf(timeInMillis);
+            binding.deadlineTxt.setText(timeInMillisStr);
+            //FirebaseFirestore db = FirebaseFirestore.getInstance();
+            //task.id = db.collection("tasks").document().getId();
+            //db.collection("tasks")
+            //        .document(task.id)
+            //        .set(task)
+            //        .addOnSuccessListener(new OnSuccessListener<Void>() {
+            //            @Override
+            //            public void onSuccess(Void unused) {
+            //                showToast("Succeed");
+            //            }
+            //        })
+            //        .addOnFailureListener(new OnFailureListener() {
+            //            @Override
+            //            public void onFailure(@NonNull Exception e) {
+            //                showToast("Failed");
+            //            }
+            //        });
     }
 }
