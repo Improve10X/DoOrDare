@@ -58,7 +58,6 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             onItemActionListener.onItemClicked(task);
         });
 
-        //#ff5436
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
         if(diffInMillis < 3600000) {
@@ -73,6 +72,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setText(timeLeft + "left");
         } else {
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
+            task.status = "'Do' not completed";
         }
     }
 
