@@ -57,9 +57,17 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
+
+        //#ff5436
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
-        holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF0000"));
+        if(diffInMillis < 3600000) {
+            holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF0000"));
+            holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF0000"));
+        }else if(diffInMillis < 10800000) {
+            holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#E82E2E"));
+            holder.binding.materialCardView.setStrokeColor(Color.parseColor("#E82E2E"));
+        }
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
         if (timeLeft.isEmpty() == false) {
             holder.binding.reducedTimeTxt.setText(timeLeft + "left");
