@@ -22,6 +22,7 @@ import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentPendingBinding;
+import com.improve10x.doordare.utils.DateUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,8 +75,8 @@ public class PendingFragment extends Fragment {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
+                .whereLessThan("doItem.deadlineTimestamp", DateUtils.nextDateInMillis())
                 .whereEqualTo("status", "Pending")
-                .orderBy("createdTimestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

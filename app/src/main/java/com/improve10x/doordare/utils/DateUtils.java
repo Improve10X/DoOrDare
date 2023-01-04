@@ -2,6 +2,9 @@ package com.improve10x.doordare.utils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DateUtils {
 
@@ -61,6 +64,21 @@ public class DateUtils {
             output += timeUnits.seconds  + " seconds ";
         }
         return output;
+    }
+
+    public static long nextDateInMillis() {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+        String currentDateText = dateFormat.format(currentDate);
+        Date date = null;
+        try {
+            date = dateFormat.parse(currentDateText);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = date.getTime();
+        millis = millis + 24 * 60 * 60 * 1000;
+        return millis;
     }
 
     static class TimeUnits {
