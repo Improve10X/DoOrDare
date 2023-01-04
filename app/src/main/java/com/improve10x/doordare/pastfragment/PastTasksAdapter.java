@@ -42,6 +42,19 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         Task task = tasks.get(position);
         holder.binding.taskTxt.setText("Do : " + task.doItem.title);
         holder.binding.dareTxt.setText("Dare : " + task.dare.title);
+        timeSetting(holder, task);
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(task);
+        });
+        setReducedTimeAndColors(holder, task);
+    }
+
+    @Override
+    public int getItemCount() {
+        return tasks.size();
+    }
+
+    private void timeSetting(PastTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
@@ -53,9 +66,9 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.timeTxt.setText(timeText);
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
-        holder.binding.getRoot().setOnClickListener(view -> {
-            onItemActionListener.onItemClicked(task);
-        });
+    }
+
+    private void setReducedTimeAndColors(PastTaskViewHolder holder, Task task) {
         if (task.status.equalsIgnoreCase("Do Completed")) {
             holder.binding.reducedTimeTxt.setText("Do Completed");
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#2B7A0B"));
@@ -65,10 +78,5 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#8BC34A"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#8BC34A"));
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return tasks.size();
     }
 }
