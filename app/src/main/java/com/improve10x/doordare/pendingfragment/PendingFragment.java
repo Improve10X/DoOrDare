@@ -74,6 +74,7 @@ public class PendingFragment extends Fragment {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
+                .whereEqualTo("status", "Pending")
                 .orderBy("createdTimestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

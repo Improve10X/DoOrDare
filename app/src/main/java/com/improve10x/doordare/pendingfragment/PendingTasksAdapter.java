@@ -1,5 +1,6 @@
 package com.improve10x.doordare.pendingfragment;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -58,6 +59,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         });
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
+        holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF0000"));
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
         if (timeLeft.isEmpty() == false) {
             holder.binding.reducedTimeTxt.setText(timeLeft + "left");
