@@ -22,6 +22,7 @@ import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentPastBinding;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PastFragment extends Fragment {
@@ -71,6 +72,7 @@ public class PastFragment extends Fragment {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
+                .whereIn("status", Arrays.asList("Do Completed", "Dare Completed"))
                 .orderBy("createdTimestamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
