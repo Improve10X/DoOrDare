@@ -43,6 +43,19 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         Task task = tasks.get(position);
         holder.binding.taskTxt.setText("Do : " + task.doItem.title);
         holder.binding.dareTxt.setText("Dare : " + task.dare.title);
+        timeSetting(holder, task);
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(task);
+        });
+        setReducedTimeAndColors(holder, task);
+    }
+
+    @Override
+    public int getItemCount() {
+        return tasks.size();
+    }
+
+    private void timeSetting(PendingTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
@@ -54,9 +67,9 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.timeTxt.setText(timeText);
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
-        holder.binding.getRoot().setOnClickListener(view -> {
-            onItemActionListener.onItemClicked(task);
-        });
+    }
+
+    private void setReducedTimeAndColors(PendingTaskViewHolder holder, Task task) {
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
         if(diffInMillis < 3600000) {
@@ -73,10 +86,5 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
             task.status = "'Do' not completed";
         }
-    }
-
-    @Override
-    public int getItemCount() {
-        return tasks.size();
     }
 }
