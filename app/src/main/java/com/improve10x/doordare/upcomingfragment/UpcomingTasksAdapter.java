@@ -42,6 +42,19 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         Task task = tasks.get(position);
         holder.binding.taskTxt.setText("Do : " + task.doItem.title);
         holder.binding.dareTxt.setText("Dare : " + task.dare.title);
+        timeSetting(holder, task);
+        holder.binding.getRoot().setOnClickListener(view -> {
+            onItemActionListener.onItemClicked(task);
+        });
+        setReducedTime(holder, task);
+    }
+
+    @Override
+    public int getItemCount() {
+        return tasks.size();
+    }
+
+    private void timeSetting(UpcomingTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
@@ -53,17 +66,12 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         holder.binding.timeTxt.setText(timeText);
         holder.binding.dateTxt.setText(dateText);
         holder.binding.monthAndYearTxt.setText(monthYear);
-        holder.binding.getRoot().setOnClickListener(view -> {
-            onItemActionListener.onItemClicked(task);
-        });
+    }
+
+    private void setReducedTime(UpcomingTaskViewHolder holder, Task task) {
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
         holder.binding.reducedTimeTxt.setText(timeLeft + "left");
-    }
-
-    @Override
-    public int getItemCount() {
-        return tasks.size();
     }
 }
