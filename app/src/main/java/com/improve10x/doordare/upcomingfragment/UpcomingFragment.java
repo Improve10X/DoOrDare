@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
 import com.improve10x.doordare.base.Constants;
@@ -22,7 +21,10 @@ import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentUpcomingBinding;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class UpcomingFragment extends Fragment {
@@ -73,7 +75,7 @@ public class UpcomingFragment extends Fragment {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("tasks")
-                .orderBy("createdTimestamp", Query.Direction.DESCENDING)
+                .whereGreaterThan("doItem.deadlineTimestamp", upcomingDateInMillis())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -92,6 +94,27 @@ public class UpcomingFragment extends Fragment {
             Intent intent = new Intent(getActivity(), AddTaskActivity.class);
             startActivity(intent);
         });
+    }
+
+    //find current date
+    //convert current date into dd MM yyyy
+    //convert dd MM yyyy to date obj
+    //get millis from date obj
+    //Add 24hrs equivalent milli seconds
+
+    private long upcomingDateInMillis() {
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
+        String currentDateText = dateFormat.format(currentDate);
+        Date date = null;
+        try {
+            date = dateFormat.parse(currentDateText);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long millis = date.getTime();
+        millis = millis + 24 * 60 * 60 * 1000;
+        return millis;
     }
 
     private void showProgressBar() {
