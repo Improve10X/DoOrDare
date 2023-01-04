@@ -1,5 +1,6 @@
 package com.improve10x.doordare.pastfragment;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -55,7 +56,15 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
-        holder.binding.reducedTimeTxt.setText("Completed");
+        if (task.status.equalsIgnoreCase("Do Completed")) {
+            holder.binding.reducedTimeTxt.setText("Do Completed");
+            holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#2B7A0B"));
+            holder.binding.materialCardView.setStrokeColor(Color.parseColor("#2B7A0B"));
+        } else {
+            holder.binding.reducedTimeTxt.setText("Dare Completed");
+            holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#8BC34A"));
+            holder.binding.materialCardView.setStrokeColor(Color.parseColor("#8BC34A"));
+        }
     }
 
     @Override

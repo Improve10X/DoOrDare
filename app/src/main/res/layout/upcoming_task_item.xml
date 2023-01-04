@@ -7,7 +7,7 @@
     android:layout_marginLeft="12dp"
     android:layout_marginTop="16dp"
     android:layout_marginRight="12dp"
-    app:strokeColor="#757575"
+    app:strokeColor="#11698E"
     app:strokeWidth="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -88,7 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:background="#757575"
+            android:background="#11698E"
             android:gravity="center_horizontal"
             android:padding="4dp"
             android:text="1 hour left"
