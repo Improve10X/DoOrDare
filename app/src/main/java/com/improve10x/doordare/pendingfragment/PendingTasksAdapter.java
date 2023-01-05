@@ -1,6 +1,7 @@
 package com.improve10x.doordare.pendingfragment;
 
 import android.graphics.Color;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -41,8 +42,10 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     @Override
     public void onBindViewHolder(@NonNull PendingTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
-        holder.binding.taskTxt.setText("Do : " + task.doItem.title);
-        holder.binding.dareTxt.setText("Dare : " + task.dare.title);
+        String doHtml = "<b>Do :</b> " + task.doItem.title;
+        holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
+        String dareHtml = "<b>Dare :</b> " + task.dare.title;
+        holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
         timeSetting(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
