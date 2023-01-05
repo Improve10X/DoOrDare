@@ -83,26 +83,6 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF6666"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF6666"));
         }
-        //String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
-        //if (timeLeft.isEmpty() == false) {
-        //    holder.binding.reducedTimeTxt.setText(timeLeft + "left");
-        //} else {
-        //    holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-        //    task.status = "'Do' not completed";
-        //}
-        CountDownTimer timer = new CountDownTimer(diffInMillis, 1000) {
-            @Override
-            public void onTick(long l) {
-                String timeLeft = DateUtils.getAdvancedTimeLeftText(l);
-                holder.binding.reducedTimeTxt.setText(timeLeft + "left");
-            }
-
-            @Override
-            public void onFinish() {
-                holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-                task.status = "'Do' not completed";
-            }
-        };
-      timer.start();
+        holder.setupTimer(diffInMillis);
     }
 }
