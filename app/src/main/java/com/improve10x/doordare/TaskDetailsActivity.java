@@ -10,6 +10,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
@@ -112,7 +114,8 @@ public class TaskDetailsActivity extends BaseActivity {
 
     private void updateTask(Task task) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("tasks")
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/tasks")
                 .document(task.id)
                 .set(task)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
