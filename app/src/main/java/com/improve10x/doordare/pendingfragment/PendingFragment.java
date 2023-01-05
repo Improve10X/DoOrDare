@@ -12,6 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -74,7 +76,8 @@ public class PendingFragment extends Fragment {
     private void fetchData() {
         showProgressBar();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("tasks")
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/tasks")
                 .whereLessThan("doItem.deadlineTimestamp", DateUtils.nextDateInMillis())
                 .whereEqualTo("status", "Pending")
                 .get()
