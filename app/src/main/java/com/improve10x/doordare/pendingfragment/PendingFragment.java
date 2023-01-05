@@ -51,6 +51,12 @@ public class PendingFragment extends Fragment {
         fetchData();
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        pendingTasksAdapter.cancelTimers();
+    }
+
     private void setupPendingTasksAdapter() {
         pendingTasksAdapter = new PendingTasksAdapter();
         pendingTasksAdapter.setData(tasks);
@@ -78,6 +84,7 @@ public class PendingFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/tasks")
+//        db.collection("/users/q9iPWLMARfehO8NXxIYKWmqq9bm2/tasks")
                 .whereLessThan("doItem.deadlineTimestamp", DateUtils.nextDateInMillis())
                 .whereEqualTo("status", "Pending")
                 .get()

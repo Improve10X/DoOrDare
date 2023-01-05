@@ -15,17 +15,31 @@ import com.improve10x.doordare.databinding.PendingItemBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHolder> {
 
     private List<Task> tasks;
+    private CountDownTimer[] timers;
     private OnItemActionListener onItemActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
+        cancelTimers();
+        timers = new CountDownTimer[tasks.size()];
         notifyDataSetChanged();
+    }
+
+    public void cancelTimers() {
+        if(timers != null) {
+            for (int i=0; i< timers.length; i++) {
+                if (timers[i] != null) {
+                    timers[i].cancel();
+                }
+            }
+        }
     }
 
     void setOnItemActionListener(OnItemActionListener onItemActionListener) {
@@ -51,7 +65,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
-        setReducedTimeAndColors(holder, task);
+        setReducedTimeAndColors(holder, task, position);
     }
 
     @Override
@@ -73,7 +87,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.monthAndYearTxt.setText(monthYear);
     }
 
-    private void setReducedTimeAndColors(PendingTaskViewHolder holder, Task task) {
+    private void setReducedTimeAndColors(PendingTaskViewHolder holder, Task task, int position) {
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
         if(diffInMillis < 3600000) {
@@ -86,10 +100,28 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         if (diffInMillis <= 0) {
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
         } else if (diffInMillis < 10 * 60 *1000) {
-            holder.setupTimer(diffInMillis);
+            if(timers[position] == null) {
+                timers[position] = getTimer(diffInMillis, holder);
+                timers[position].start();
+            }
         } else {
             String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
             holder.binding.reducedTimeTxt.setText(timeLeft + "left");
         }
+    }
+
+    public CountDownTimer getTimer(long diffInMillis, PendingTaskViewHolder holder) {
+        return new CountDownTimer(diffInMillis, 1000) {
+            @Override
+            public void onTick(long l) {
+                String timeLeft = DateUtils.getAdvancedTimeLeftText(l);
+                holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+            }
+
+            @Override
+            public void onFinish() {
+                holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
+            }
+        };
     }
 }
