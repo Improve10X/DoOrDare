@@ -83,6 +83,13 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF6666"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF6666"));
         }
-        holder.setupTimer(diffInMillis);
+        if (diffInMillis <= 0) {
+            holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
+        } else if (diffInMillis < 10 * 60 *1000) {
+            holder.setupTimer(diffInMillis);
+        } else {
+            String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
+            holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+        }
     }
 }
