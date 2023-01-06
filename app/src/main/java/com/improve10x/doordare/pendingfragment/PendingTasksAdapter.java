@@ -101,7 +101,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
         } else if (diffInMillis < 10 * 60 *1000) {
             if(timers[position] == null) {
-                timers[position] = getTimer(diffInMillis, holder);
+                timers[position] = getTimer(diffInMillis, holder, task);
                 timers[position].start();
             }
         } else {
@@ -110,7 +110,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         }
     }
 
-    public CountDownTimer getTimer(long diffInMillis, PendingTaskViewHolder holder) {
+    public CountDownTimer getTimer(long diffInMillis, PendingTaskViewHolder holder, Task task) {
         return new CountDownTimer(diffInMillis, 1000) {
             @Override
             public void onTick(long l) {
