@@ -17,6 +17,7 @@ import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
 import com.improve10x.doordare.base.task.Task;
+import com.improve10x.doordare.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.Date;
@@ -59,8 +60,6 @@ public class TaskDetailsActivity extends BaseActivity {
             pendingStatus();
         } else if (task.status.equalsIgnoreCase("Do Completed")) {
             doCompletedStatus();
-        } else if (task.status.equalsIgnoreCase("'Do' not completed")) {
-            doNotCompletedStatus();
         } else if (task.status.equalsIgnoreCase("Dare Completed")) {
             dareCompletedStatus();
         }
@@ -70,6 +69,13 @@ public class TaskDetailsActivity extends BaseActivity {
         binding.doCompletedBtn.setVisibility(View.VISIBLE);
         binding.materialCardView.setVisibility(View.GONE);
         handleTaskCompletedBtn();
+        long currentTimeInMillis = System.currentTimeMillis();
+        if (currentTimeInMillis < task.doItem.deadlineTimestamp) {
+            binding.statusTxt.setText(task.status);
+        } else if (currentTimeInMillis >= task.doItem.deadlineTimestamp) {
+            binding.statusTxt.setText("'Do' not completed");
+            doNotCompletedStatus();
+        }
     }
 
     private void doCompletedStatus() {
@@ -84,6 +90,7 @@ public class TaskDetailsActivity extends BaseActivity {
         Picasso.get().load("https://www.linkpicture.com/q/unnamed_28.png").into(binding.wishesImg);
         binding.informTxt.setText("You haven't completed the 'Do' task \uD83D\uDE46\uD83C\uDFFB\u200D♂️, so 'Dare' needs to be completed\uD83E\uDD37\uD83C\uDFFB\u200D♂️");
         binding.dareCompletedBtn.setVisibility(View.VISIBLE);
+        binding.doCompletedBtn.setVisibility(View.GONE);
         handleDareCompletedBtn();
     }
 
