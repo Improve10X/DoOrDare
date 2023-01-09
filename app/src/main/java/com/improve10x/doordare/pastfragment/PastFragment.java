@@ -84,7 +84,12 @@ public class PastFragment extends Fragment {
                         if (task.isSuccessful()) {
                             hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
-                            pastTasksAdapter.setData(tasks);
+                            if (tasks.isEmpty() == false) {
+                                pastTasksAdapter.setData(tasks);
+                                dataScreen();
+                            } else {
+                                emptyScreen();
+                            }
                         }
                     }
                 });
@@ -96,5 +101,15 @@ public class PastFragment extends Fragment {
 
     private void hideProgressBar() {
         binding.progressBar.setVisibility(View.GONE);
+    }
+
+    private void emptyScreen() {
+        binding.pastScreenInfoTxt.setVisibility(View.VISIBLE);
+        binding.pastTasksRv.setVisibility(View.GONE);
+    }
+
+    private void dataScreen() {
+        binding.pastScreenInfoTxt.setVisibility(View.GONE);
+        binding.pastTasksRv.setVisibility(View.VISIBLE);
     }
 }
