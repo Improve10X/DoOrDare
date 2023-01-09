@@ -94,9 +94,7 @@ public class PendingFragment extends Fragment {
                             List<Task> tasks = task.getResult().toObjects(Task.class);
                             if (tasks.isEmpty() == false) {
                                 pendingTasksAdapter.setData(tasks);
-                                binding.addTaskImg.setVisibility(View.GONE);
-                                binding.tickMarkImg.setVisibility(View.GONE);
-                                binding.pendingTasksRv.setVisibility(View.VISIBLE);
+                                dataScreen();
                             } else {
                                 emptyScreen();
                             }
@@ -122,8 +120,14 @@ public class PendingFragment extends Fragment {
 
     private void emptyScreen() {
         binding.addTaskImg.setVisibility(View.VISIBLE);
-        binding.tickMarkImg.setVisibility(View.VISIBLE);
+        binding.arrowMarkImg.setVisibility(View.VISIBLE);
         binding.pendingTasksRv.setVisibility(View.GONE);
+    }
+
+    private void dataScreen() {
+        binding.addTaskImg.setVisibility(View.GONE);
+        binding.arrowMarkImg.setVisibility(View.GONE);
+        binding.pendingTasksRv.setVisibility(View.VISIBLE);
     }
 }
 
