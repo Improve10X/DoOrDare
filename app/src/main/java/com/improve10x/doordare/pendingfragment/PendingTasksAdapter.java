@@ -90,12 +90,15 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     private void setReducedTimeAndColors(PendingTaskViewHolder holder, Task task, int position) {
         long currentTimeInMillis = System.currentTimeMillis();
         long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
-        if(diffInMillis < 3600000) {
+        if (diffInMillis < 3600000) {
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF0000"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF0000"));
-        }else if(diffInMillis < 10800000) {
+        } else if (diffInMillis < 10800000) {
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF6666"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF6666"));
+        } else if (diffInMillis > 10800000) {
+            holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#F57C00"));
+            holder.binding.materialCardView.setStrokeColor(Color.parseColor("#F57C00"));
         }
         if (diffInMillis <= 0) {
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
