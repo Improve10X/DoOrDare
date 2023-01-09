@@ -88,7 +88,12 @@ public class UpcomingFragment extends Fragment {
                         if (task.isSuccessful()) {
                             hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
-                            upcomingTasksAdapter.setData(tasks);
+                            if (tasks.isEmpty() == false) {
+                                upcomingTasksAdapter.setData(tasks);
+                                dataScreen();
+                            } else {
+                                emptyScreen();
+                            }
                         }
                     }
                 });
@@ -107,5 +112,17 @@ public class UpcomingFragment extends Fragment {
 
     private void hideProgressBar() {
         binding.progressBar.setVisibility(View.GONE);
+    }
+
+    private void emptyScreen() {
+        binding.addTaskImg.setVisibility(View.VISIBLE);
+        binding.arrowMarkImg.setVisibility(View.VISIBLE);
+        binding.upcomingTasksRv.setVisibility(View.GONE);
+    }
+
+    private void dataScreen() {
+        binding.addTaskImg.setVisibility(View.GONE);
+        binding.arrowMarkImg.setVisibility(View.GONE);
+        binding.upcomingTasksRv.setVisibility(View.VISIBLE);
     }
 }
