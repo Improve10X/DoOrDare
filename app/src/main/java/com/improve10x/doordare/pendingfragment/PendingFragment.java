@@ -15,7 +15,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
@@ -84,7 +83,6 @@ public class PendingFragment extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/tasks")
-//        db.collection("/users/q9iPWLMARfehO8NXxIYKWmqq9bm2/tasks")
                 .whereLessThan("doItem.deadlineTimestamp", DateUtils.nextDateInMillis())
                 .whereEqualTo("status", "Pending")
                 .get()
@@ -93,13 +91,13 @@ public class PendingFragment extends Fragment {
                     public void onComplete(@NonNull com.google.android.gms.tasks.Task<QuerySnapshot> task) {
                         hideProgressBar();
                         if (task.isSuccessful()) {
-                            List<Task> tasks = new ArrayList<>();
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Task taskItem = document.toObject(Task.class);
-                                taskItem.id = document.getId();
-                                tasks.add(taskItem);
+                            List<Task> tasks = task.getResult().toObjects(Task.class);
+                            if (tasks.isEmpty() == false) {
+                                pendingTasksAdapter.setData(tasks);
+                                dataScreen();
+                            } else {
+                                emptyScreen();
                             }
-                            pendingTasksAdapter.setData(tasks);
                         }
                     }
                 });
@@ -118,6 +116,18 @@ public class PendingFragment extends Fragment {
 
     private void hideProgressBar() {
         binding.progressBar.setVisibility(View.GONE);
+    }
+
+    private void emptyScreen() {
+        binding.addTaskImg.setVisibility(View.VISIBLE);
+        binding.arrowMarkImg.setVisibility(View.VISIBLE);
+        binding.pendingTasksRv.setVisibility(View.GONE);
+    }
+
+    private void dataScreen() {
+        binding.addTaskImg.setVisibility(View.GONE);
+        binding.arrowMarkImg.setVisibility(View.GONE);
+        binding.pendingTasksRv.setVisibility(View.VISIBLE);
     }
 }
 
