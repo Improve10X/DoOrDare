@@ -111,11 +111,11 @@ public class PendingFragment extends Fragment {
     }
 
     private void showProgressBar() {
-        binding.progressBar.setVisibility(View.VISIBLE);
+        binding.progress.setVisibility(View.VISIBLE);
     }
 
     private void hideProgressBar() {
-        binding.progressBar.setVisibility(View.GONE);
+        binding.progress.setVisibility(View.GONE);
     }
 
     private void emptyScreen() {
