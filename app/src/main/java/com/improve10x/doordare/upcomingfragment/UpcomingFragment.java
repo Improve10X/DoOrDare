@@ -115,14 +115,12 @@ public class UpcomingFragment extends Fragment {
     }
 
     private void emptyScreen() {
-        binding.addTaskImg.setVisibility(View.VISIBLE);
-        binding.arrowMarkImg.setVisibility(View.VISIBLE);
+        binding.infoGroup.setVisibility(View.VISIBLE);
         binding.upcomingTasksRv.setVisibility(View.GONE);
     }
 
     private void dataScreen() {
-        binding.addTaskImg.setVisibility(View.GONE);
-        binding.arrowMarkImg.setVisibility(View.GONE);
+        binding.infoGroup.setVisibility(View.GONE);
         binding.upcomingTasksRv.setVisibility(View.VISIBLE);
     }
 }
