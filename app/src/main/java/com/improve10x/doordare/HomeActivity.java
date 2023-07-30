@@ -9,6 +9,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.tabs.TabLayout;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -47,19 +48,37 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout) {
-            AuthUI.getInstance()
-                    .signOut(this)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
+            showSignOutDialog();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void signOut() {
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+    }
+
+    private void showSignOutDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+        alertDialog.setTitle("Alert...!!!");
+        alertDialog.setMessage("Are you sure do you want to Logout?");
+        alertDialog.setPositiveButton("Yes", (dialogInterface, i) -> {
+            signOut();
+        });
+        alertDialog.setNegativeButton("No", (dialogInterface, i) -> {
+            alertDialog.setCancelable(true);
+        });
+        AlertDialog alertDialog1 = alertDialog.create();
+        alertDialog1.show();
     }
 }
