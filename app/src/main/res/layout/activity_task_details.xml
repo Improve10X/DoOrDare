@@ -120,6 +120,7 @@
                 android:layout_height="180dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
@@ -127,6 +128,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ED7D2D"
+                android:fontFamily="serif"
                 android:gravity="center"
                 android:padding="20dp"
                 android:text="You haven't completed the &quot;Do&quot; task 🙆🏻‍♂️, so Dare needs to be completed🤷🏻‍♂️"
