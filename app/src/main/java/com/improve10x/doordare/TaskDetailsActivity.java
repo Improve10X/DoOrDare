@@ -88,7 +88,7 @@ public class TaskDetailsActivity extends BaseActivity {
 
     private void doNotCompletedStatus() {
         binding.materialCardView.setVisibility(View.VISIBLE);
-        Picasso.get().load("https://www.linkpicture.com/q/unnamed_28.png").into(binding.wishesImg);
+        Picasso.get().load("https://lh6.googleusercontent.com/proxy/32dDmknRg0Ji1f9ZrfKwfH2OmwSC-9aeGdgrtu0YH6isG0Gzs74JNBFRLXXJLXxm2D045G3tSf2Jnw").into(binding.wishesImg);
         binding.informTxt.setText("You haven't completed the 'Do' task \uD83D\uDE46\uD83C\uDFFB\u200D♂️, so 'Dare' needs to be completed\uD83E\uDD37\uD83C\uDFFB\u200D♂️");
         binding.dareCompletedBtn.setVisibility(View.VISIBLE);
         binding.doCompletedBtn.setVisibility(View.GONE);
