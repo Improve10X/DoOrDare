@@ -130,6 +130,10 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             Date date1 = new Date(calendar.getTimeInMillis());
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
             String displayTime = dateFormat.format(date1);
-            binding.deadlineTxt.setText(displayTime);
+            if (doDeadlineTimestamp > System.currentTimeMillis()) {
+                binding.deadlineTxt.setText(displayTime);
+            } else {
+                Toast.makeText(this, "Time should be greater than present time", Toast.LENGTH_LONG).show();
+            }
     }
 }
