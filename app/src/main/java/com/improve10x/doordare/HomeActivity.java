@@ -70,8 +70,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private void showSignOutDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setTitle("Alert...!!!");
-        alertDialog.setMessage("Are you sure do you want to Logout?");
+        alertDialog.setTitle("Logout");
+        alertDialog.setMessage("Are you sure you want to Logout?");
         alertDialog.setPositiveButton("Yes", (dialogInterface, i) -> {
             signOut();
         });
