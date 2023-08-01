@@ -37,5 +37,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/screenshot_2022_10_10_at_8_47_57_am" />
+        app:srcCompat="@drawable/do_or_dare_img" />
 </androidx.constraintlayout.widget.ConstraintLayout>
