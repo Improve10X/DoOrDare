@@ -49,7 +49,6 @@ public class LoginActivity extends BaseActivity {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-            showToast("Login Success");
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
             finish();

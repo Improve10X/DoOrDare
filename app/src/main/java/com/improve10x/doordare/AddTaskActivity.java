@@ -100,7 +100,6 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        showToast("Successfully Added Task");
                         finish();
                     }
                 })
@@ -133,7 +132,7 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             if (doDeadlineTimestamp > System.currentTimeMillis()) {
                 binding.deadlineTxt.setText(displayTime);
             } else {
-                Toast.makeText(this, "Time should be greater than present time", Toast.LENGTH_LONG).show();
+                showToast("Time should be greater than present time");
             }
     }
 }
