@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace 'com.improve10x.doordare'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.improve10x.doordare"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore'
     implementation 'com.squareup.picasso:picasso:2.8'
     implementation 'com.github.noowenz:CustomDateTimePicker:1.01'
+    implementation "com.airbnb.android:lottie:6.1.0"
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
