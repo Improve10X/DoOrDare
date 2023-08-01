@@ -129,7 +129,6 @@ public class TaskDetailsActivity extends BaseActivity {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-                        showToast("Updated");
                         showData();
                     }
                 })
