@@ -18,6 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
+import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
@@ -64,6 +65,9 @@ public class PendingFragment extends Fragment {
             public void onItemClicked(Task task) {
                 itemClicked(task);
             }
+        });
+        pendingTasksAdapter.setOnTimeActionListener((notificationTitle, notificationMsg) -> {
+            Notification.pushNotification(getContext(), notificationTitle, notificationMsg);
         });
     }
 

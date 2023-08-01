@@ -12,7 +12,7 @@ import androidx.core.app.NotificationManagerCompat;
 
 public class Notification {
 
-    public static void pushNotification(Context context, String title, String message) {
+    public static void pushNotification(Context context, String notificationTitle, String notificationMsg) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel notificationChannel = new NotificationChannel("Do/Dare", "Do/Dare", NotificationManager.IMPORTANCE_DEFAULT);
             NotificationManager notificationManager = getSystemService(context, NotificationManager.class);
@@ -21,9 +21,9 @@ public class Notification {
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder
                 (context, "Do/Dare");
-        notificationBuilder.setContentTitle(title);
-        notificationBuilder.setContentText(message);
-        notificationBuilder.setSmallIcon(R.drawable.do_or_dare_img);
+        notificationBuilder.setContentTitle(notificationTitle);
+        notificationBuilder.setContentText(notificationMsg);
+        notificationBuilder.setSmallIcon(R.drawable.do_or_dare_orange_img);
         notificationBuilder.setAutoCancel(true);
 
         NotificationManagerCompat managerCompat = NotificationManagerCompat.from(context);
