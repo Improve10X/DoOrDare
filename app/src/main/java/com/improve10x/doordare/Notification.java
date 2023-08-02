@@ -30,7 +30,7 @@ public class Notification {
                 (context, "Do/Dare");
         notificationBuilder.setContentTitle(notificationTitle);
         notificationBuilder.setContentText(notificationMsg);
-        notificationBuilder.setSmallIcon(R.drawable.do_or_dare_orange_img);
+        notificationBuilder.setSmallIcon(R.drawable.doorg);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationBuilder.setAutoCancel(true);
 
