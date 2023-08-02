@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.PendingItemBinding;
@@ -24,6 +25,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     private List<Task> tasks;
     private CountDownTimer[] timers;
     private OnItemActionListener onItemActionListener;
+    private OnTimeActionListener onTimeActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
@@ -44,6 +46,10 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
 
     void setOnItemActionListener(OnItemActionListener onItemActionListener) {
         this.onItemActionListener = onItemActionListener;
+    }
+
+    void setOnTimeActionListener(OnTimeActionListener onTimeActionListener) {
+        this.onTimeActionListener = onTimeActionListener;
     }
 
     @NonNull
@@ -124,6 +130,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             @Override
             public void onFinish() {
                 holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
+                onTimeActionListener.showNotification("Alert..!!!", task.doItem.title);
             }
         };
     }
