@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
+                .setTheme(R.style.Theme_DoOrDare)
                 .build();
         signInLauncher.launch(signInIntent);
     }
