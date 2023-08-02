@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.DoOrDare" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.DoOrDare" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#F57C00</item>
         <item name="colorPrimaryVariant">#E65100</item>
