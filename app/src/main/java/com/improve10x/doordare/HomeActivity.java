@@ -50,6 +50,9 @@ public class HomeActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.logout) {
             showSignOutDialog();
             return true;
+        } else if (item.getItemId() == R.id.login_with_mobile_number) {
+            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+            return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
