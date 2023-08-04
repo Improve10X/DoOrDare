@@ -19,6 +19,7 @@ public class UserAccessActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityUserAccessBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        getSupportActionBar().setTitle("Login");
         firebaseAuth = FirebaseAuth.getInstance();
         handleLoginBtn();
         handleGuestBtn();
