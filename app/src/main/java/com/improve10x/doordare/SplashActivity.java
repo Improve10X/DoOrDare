@@ -52,7 +52,9 @@ public class SplashActivity extends AppCompatActivity {
 
     private void showAnimation() {
         Animation animation = AnimationUtils.loadAnimation(SplashActivity.this, android.R.anim.slide_in_left);
-        binding.doOrDareImg.startAnimation(animation);
+        Glide.with(SplashActivity.this)
+                .load(R.drawable.do_or_dare_gif)
+                .into(binding.doOrDareImg);
         Glide.with(SplashActivity.this)
                 .load("https://images.squarespace-cdn.com/content/v1/5ce86c3589cdd000019bb991/506cd0da-bae1-46d1-95b2-fef141cd3e7d/loading+gif+1.gif")
                 .into(binding.loadingImg);
