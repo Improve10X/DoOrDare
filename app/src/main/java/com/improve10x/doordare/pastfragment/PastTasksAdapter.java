@@ -1,13 +1,16 @@
 package com.improve10x.doordare.pastfragment;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.improve10x.doordare.R;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.PastTaskItemBinding;
@@ -20,6 +23,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
 
     private List<Task> tasks;
     private OnItemActionListener onItemActionListener;
+    private OnDeleteActionListener onDeleteActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
@@ -28,6 +32,10 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
 
     void setOnItemActionListener(OnItemActionListener onItemActionListener) {
         this.onItemActionListener = onItemActionListener;
+    }
+
+    void setOnDeleteActionListener(OnDeleteActionListener onDeleteActionListener) {
+        this.onDeleteActionListener = onDeleteActionListener;
     }
 
     @NonNull
@@ -48,6 +56,9 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         timeSetting(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
+        });
+        holder.binding.deleteBtn.setOnClickListener(v -> {
+            onDeleteActionListener.onDelete(task.id);
         });
         setReducedTimeAndColors(holder, task);
     }

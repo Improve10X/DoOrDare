@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -62,6 +63,10 @@ public class PastFragment extends Fragment {
                 itemClicked(task);
             }
         });
+        pastTasksAdapter.setOnDeleteActionListener(taskId -> {
+            deleteTask(taskId);
+        });
+
     }
 
     private void itemClicked(Task task) {
@@ -111,5 +116,19 @@ public class PastFragment extends Fragment {
     private void dataScreen() {
         binding.pastScreenInfoTxt.setVisibility(View.GONE);
         binding.pastTasksRv.setVisibility(View.VISIBLE);
+    }
+
+    private void deleteTask(String taskId) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        db.collection("/users/" + user.getUid() + "/tasks")
+                .document(taskId)
+                .delete()
+                .addOnSuccessListener(unused -> {
+                    Toast.makeText(getContext(), "Task deleted", Toast.LENGTH_SHORT).show();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(getContext(), "Failed to delete", Toast.LENGTH_SHORT).show();
+                });
     }
 }
