@@ -126,6 +126,7 @@ public class PastFragment extends Fragment {
                 .delete()
                 .addOnSuccessListener(unused -> {
                     Toast.makeText(getContext(), "Task deleted", Toast.LENGTH_SHORT).show();
+                    fetchData();
                 })
                 .addOnFailureListener(e -> {
                     Toast.makeText(getContext(), "Failed to delete", Toast.LENGTH_SHORT).show();
