@@ -20,8 +20,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#F57C00 "
-            app:strokeWidth="2dp">
+            app:strokeColor="#F1EDE9"
+            app:strokeWidth="1dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -61,8 +61,8 @@
             app:layout_constraintEnd_toEndOf="@+id/materialCardView2"
             app:layout_constraintStart_toStartOf="@+id/materialCardView2"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
-            app:strokeColor="#F57C00 "
-            app:strokeWidth="2dp">
+            app:strokeColor="#F1EDE9"
+            app:strokeWidth="1dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -104,8 +104,8 @@
             app:layout_constraintEnd_toEndOf="@+id/materialCardView4"
             app:layout_constraintStart_toStartOf="@+id/materialCardView4"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
-            app:strokeColor="#F57C00 "
-            app:strokeWidth="2dp">
+            app:strokeColor="#F1EDE9"
+            app:strokeWidth="1dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -146,8 +146,8 @@
             app:layout_constraintEnd_toEndOf="@+id/materialCardView5"
             app:layout_constraintStart_toStartOf="@+id/materialCardView5"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView5"
-            app:strokeColor="#F57C00 "
-            app:strokeWidth="2dp">
+            app:strokeColor="#F1EDE9"
+            app:strokeWidth="1dp">
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
