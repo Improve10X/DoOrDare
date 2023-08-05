@@ -21,6 +21,7 @@ import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TaskDetailsActivity extends BaseActivity {
@@ -54,8 +55,9 @@ public class TaskDetailsActivity extends BaseActivity {
         binding.dareTxt.setText(task.dare.title);
         long deadline = task.doItem.deadlineTimestamp;
         Date date = new Date(deadline);
-        String deadlineStr = String.valueOf(date);
-        binding.deadlineTxt.setText(deadlineStr);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm aa");
+        String deadlineTxt = simpleDateFormat.format(date);
+        binding.deadlineTxt.setText(deadlineTxt);
         binding.statusTxt.setText(task.status);
         if (task.status.equalsIgnoreCase("Pending")) {
             pendingStatus();

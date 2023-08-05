@@ -11,6 +11,7 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -130,14 +131,17 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
 
     @Override
     public void onSet(@NonNull Dialog dialog, @NonNull Calendar calendar, @NonNull Date date, int i, @NonNull String s, @NonNull String s1, int i1, int i2, @NonNull String s2, @NonNull String s3, int i3, int i4, int i5, int i6, @NonNull String s4) {
-            doDeadlineTimestamp = calendar.getTimeInMillis();
-            Date date1 = new Date(calendar.getTimeInMillis());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
-            String displayTime = dateFormat.format(date1);
-            if (doDeadlineTimestamp > System.currentTimeMillis()) {
-                binding.deadlineTxt.setText(displayTime);
-            } else {
-                showToast("Time should be greater than present time");
-            }
+        doDeadlineTimestamp = calendar.getTimeInMillis();
+        Date date1 = new Date(calendar.getTimeInMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
+        String displayTime = dateFormat.format(date1);
+        if (doDeadlineTimestamp > System.currentTimeMillis()) {
+            binding.errorTxt.setVisibility(View.GONE);
+            binding.deadlineTxt.setText(displayTime);
+        } else {
+            doDeadlineTimestamp = 0;
+            binding.deadlineTxt.setText("");
+            binding.errorTxt.setVisibility(View.VISIBLE);
+        }
     }
 }

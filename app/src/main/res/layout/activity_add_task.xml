@@ -65,6 +65,18 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/error_txt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="* Time should be greater than present time"
+            android:textColor="#FB0404"
+            android:textSize="14sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="@+id/textInputLayout7"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout7"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
+
         <ImageButton
             android:id="@+id/calendar_btn"
             android:layout_width="wrap_content"
@@ -89,7 +101,7 @@
             android:textAllCaps="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout7" />
+            app:layout_constraintTop_toBottomOf="@+id/error_txt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
