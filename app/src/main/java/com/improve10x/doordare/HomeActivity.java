@@ -20,7 +20,8 @@ import android.widget.Toast;
 import com.improve10x.doordare.ui.main.SectionsPagerAdapter;
 import com.improve10x.doordare.databinding.ActivityHomeBinding;
 
-public class HomeActivity extends AppCompatActivity {
+public class
+HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
 
@@ -49,6 +50,9 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout) {
             showSignOutDialog();
+            return true;
+        } else if (item.getItemId() == R.id.login_wthin_mobile_name) {
+            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
