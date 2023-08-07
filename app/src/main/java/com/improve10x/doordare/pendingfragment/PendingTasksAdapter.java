@@ -130,8 +130,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             @Override
             public void onFinish() {
                 holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-                onTimeActionListener.showNotification("Alert..!!!", task.doItem.title);
-            }
+                onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.doItem.title);            }
         };
     }
 }
