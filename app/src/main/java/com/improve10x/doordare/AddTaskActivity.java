@@ -160,9 +160,17 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             addTask(doTitle, dareTitle);
             finish();
         } else {
-            binding.doTxt.setText("");
-            binding.dareTxt.setText("");
-            showToast("Do and Dare not including all spaces");
+            if (isAllSpaces(doTitle) && isAllSpaces(dareTitle)) {
+                binding.doTxt.setText("");
+                binding.dareTxt.setText("");
+                showToast("Do and dare not including all spaces");
+            } else if (isAllSpaces(doTitle) && !isAllSpaces(dareTitle)) {
+                binding.doTxt.setText("");
+                showToast("Do not including all spaces");
+            } else if (!isAllSpaces(doTitle) && isAllSpaces(dareTitle)){
+                binding.dareTxt.setText("");
+                showToast("Dare not including all spaces");
+            }
         }
     }
 }
