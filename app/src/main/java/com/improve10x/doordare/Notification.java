@@ -30,7 +30,7 @@ public class Notification {
                 (context, "Do/Dare");
         notificationBuilder.setContentTitle(notificationTitle);
         notificationBuilder.setContentText(notificationMsg);
-        notificationBuilder.setSmallIcon(R.drawable.doorg);
+        notificationBuilder.setSmallIcon(R.mipmap.ic_launcher);
         notificationBuilder.setContentIntent(pendingIntent);
         notificationBuilder.setAutoCancel(true);
 
