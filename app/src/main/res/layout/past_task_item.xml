@@ -61,13 +61,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="Do : some task"
             app:layout_constraintBottom_toTopOf="@+id/dare_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toStartOf="@+id/delete_btn"
             app:layout_constraintStart_toEndOf="@+id/month_and_year_txt"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
@@ -77,14 +75,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="12dp"
             android:layout_marginBottom="12dp"
             android:ellipsize="end"
             android:maxLines="2"
             android:text="Dare : some dare"
             app:layout_constraintBottom_toTopOf="@+id/reduced_time_txt"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintEnd_toEndOf="@+id/task_txt"
             app:layout_constraintStart_toStartOf="@+id/task_txt"
             app:layout_constraintTop_toBottomOf="@+id/task_txt" />
 
@@ -108,11 +104,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:paddingTop="2dp"
-            android:paddingRight="2dp"
+            android:paddingTop="4dp"
+            android:paddingRight="4dp"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/baseline_delete_24" />
+            app:srcCompat="@drawable/baseline_delete_outline_24" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>
