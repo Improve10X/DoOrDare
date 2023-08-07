@@ -62,8 +62,7 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             String doTitle = binding.doTxt.getText().toString();
             String dareTitle = binding.dareTxt.getText().toString();
             if (doTitle.equals("") == false && dareTitle.equals("") == false && doDeadlineTimestamp != 0) {
-                addTask(doTitle, dareTitle);
-                finish();
+                handleAddTask(doTitle, dareTitle);
             } else if (doTitle.equals("") == false && dareTitle.equals("") == true && doDeadlineTimestamp == 0) {
                 showToast("Fill Dare and Deadline");
             } else if (doTitle.equals("") == false && dareTitle.equals("") == false && doDeadlineTimestamp == 0) {
@@ -142,6 +141,28 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
             doDeadlineTimestamp = 0;
             binding.deadlineTxt.setText("");
             binding.errorTxt.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public boolean isAllSpaces(String text) {
+        int spaceChars = 0;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (c == ' ') {
+                spaceChars++;
+            }
+        }
+        return spaceChars == text.length();
+    }
+
+    private void handleAddTask(String doTitle, String dareTitle) {
+        if (!isAllSpaces(doTitle) && !isAllSpaces(dareTitle)) {
+            addTask(doTitle, dareTitle);
+            finish();
+        } else {
+            binding.doTxt.setText("");
+            binding.dareTxt.setText("");
+            showToast("Do and Dare not including all spaces");
         }
     }
 }
