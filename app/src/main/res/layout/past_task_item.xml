@@ -106,7 +106,7 @@
             android:background="@color/white"
             android:paddingTop="4dp"
             android:paddingRight="4dp"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/baseline_delete_outline_24" />
