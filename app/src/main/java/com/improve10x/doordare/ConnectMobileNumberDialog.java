@@ -43,7 +43,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
     }
 
     private void handleVerify() {
-        binding.verifyBtn.setOnClickListener(v -> {
+        binding.sendOtpBtn.setOnClickListener(v -> {
             PhoneAuthProvider.OnVerificationStateChangedCallbacks callBacks =
                     new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                         @Override
@@ -59,6 +59,8 @@ public class ConnectMobileNumberDialog extends DialogFragment {
                         @Override
                         public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                             ConnectMobileNumberDialog.this.verificationId = verificationId;
+                            binding.group.setVisibility(View.VISIBLE);
+                            binding.sendOtpBtn.setVisibility(View.GONE);
                         }
                     };
             PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth)
