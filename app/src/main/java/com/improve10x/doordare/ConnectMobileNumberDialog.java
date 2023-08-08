@@ -1,7 +1,6 @@
 package com.improve10x.doordare;
 
 import android.annotation.SuppressLint;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,48 +27,59 @@ import java.util.concurrent.TimeUnit;
 public class ConnectMobileNumberDialog extends DialogFragment {
 
     private DialogConnectMobileNumberBinding binding;
-    private FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private String verificationId;
-
-    public static final String TAG = "ConnectWithMobileNumberDialog";
+    private static final String TAG = "ConnectWithMobileNumberDialog";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DialogConnectMobileNumberBinding.inflate(getLayoutInflater());
-        handleVerify();
+        handleSendOTP();
         handleConfirm();
         return binding.getRoot();
     }
 
-    private void handleVerify() {
-        binding.verifyBtn.setOnClickListener(v -> {
-            PhoneAuthProvider.OnVerificationStateChangedCallbacks callBacks =
-                    new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                        @Override
-                        public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                            Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onVerificationFailed(@NonNull FirebaseException e) {
-                            Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
-                        }
-
-                        @Override
-                        public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                            ConnectMobileNumberDialog.this.verificationId = verificationId;
-                        }
-                    };
-            PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth)
-                    .setPhoneNumber(binding.mobileNumberTxt.getText().toString())
-                    .setTimeout(60L, TimeUnit.SECONDS)
-                    .setActivity(getActivity())
-                    .setCallbacks(callBacks)
-                    .build();
-            PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
+    private void handleSendOTP() {
+        binding.sendOtpBtn.setOnClickListener(v -> {
+            String phoneNumber = binding.mobileNumberTxt.getText().toString();
+            if (!phoneNumber.isEmpty()) {
+                PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth)
+                        .setPhoneNumber(phoneNumber)
+                        .setTimeout(60L, TimeUnit.SECONDS)
+                        .setActivity(getActivity())
+                        .setCallbacks(createCallbacksObject())
+                        .build();
+                PhoneAuthProvider.verifyPhoneNumber(phoneAuthOptions);
+            } else {
+                Toast.makeText(getContext(), "Enter valid Mobile number", Toast.LENGTH_SHORT).show();
+            }
         });
     }
+
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks createCallbacksObject() {
+        PhoneAuthProvider.OnVerificationStateChangedCallbacks callBacks =
+                new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                    @Override
+                    public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+                        Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onVerificationFailed(@NonNull FirebaseException e) {
+                        Toast.makeText(getContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onCodeSent(@NonNull String verificationId, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                        ConnectMobileNumberDialog.this.verificationId = verificationId;
+                        binding.group.setVisibility(View.VISIBLE);
+                        binding.sendOtpBtn.setVisibility(View.GONE);
+                    }
+                };
+        return callBacks;
+    }
+
     private void handleConfirm() {
         binding.confirmBtn.setOnClickListener(v -> {
             String otp = binding.otpTxt.getText().toString();
@@ -79,7 +89,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
                         @SuppressLint("LongLogTag")
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()) {
+                            if (task.isSuccessful()) {
                                 Log.w(TAG, "LinkWithCredential:Success");
                                 Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
                                 dismiss();
