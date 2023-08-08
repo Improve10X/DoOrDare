@@ -52,7 +52,7 @@ HomeActivity extends AppCompatActivity {
             showSignOutDialog();
             return true;
         } else if (item.getItemId() == R.id.login_wthin_mobile_name) {
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+            new ConnectMobileNumberDialog().show(getSupportFragmentManager(), "Connect with Mobile Number");
             return true;
         } else {
             return super.onOptionsItemSelected(item);
