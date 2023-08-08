@@ -10,15 +10,18 @@
 
     <Button
         android:id="@+id/send_otp_btn"
-        style="@style/FirebaseUI.Button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_weight="1"
         android:text="Send OTP"
+        android:textColor="@color/orange"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="1dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout3"
@@ -34,7 +37,8 @@
             android:id="@+id/mobile_number_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your mobile number" />
+            android:hint="Enter your mobile number"
+            android:inputType="phone" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,19 +57,23 @@
             android:id="@+id/otp_txt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter OTP" />
+            android:hint="Enter OTP"
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/confirm_btn"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="1dp" />
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
