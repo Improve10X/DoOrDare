@@ -71,7 +71,9 @@ public class PendingFragment extends Fragment {
             Notification.pushNotification(getContext(), notificationTitle, notificationMsg);
         });
         pendingTasksAdapter.setOnEditActionListener(task -> {
-            Toast.makeText(getContext(), "EditButtonClicked", Toast.LENGTH_SHORT).show();
+           Intent intent = new Intent(getContext(), AddTaskActivity.class);
+           intent.putExtra(Constants.KEY_TASK, task);
+           startActivity(intent);
         });
     }
 
