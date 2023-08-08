@@ -74,8 +74,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
         binding.confirmBtn.setOnClickListener(v -> {
             String otp = binding.otpTxt.getText().toString();
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otp);
-            firebaseAuth.getCurrentUser().linkWithCredential(credential);
-            firebaseAuth.signInWithCredential(credential)
+            firebaseAuth.getCurrentUser().linkWithCredential(credential)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @SuppressLint("LongLogTag")
                         @Override
