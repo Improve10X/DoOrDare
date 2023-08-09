@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -354,7 +355,21 @@ public class ConnectMobileNumberDialog extends DialogFragment {
     }
 
     private void setupSpinner() {
-        CountryCodesAdapter adapter = new CountryCodesAdapter(getContext(), R.layout.country_code_item, getCountryCodes());
+        ArrayList<CountryCode> countryCodes = getCountryCodes();
+        CountryCodesAdapter adapter = new CountryCodesAdapter(getContext(), R.layout.country_code_item, countryCodes);
         binding.countryCodeSp.setAdapter(adapter);
+        binding.countryCodeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String countryCode = countryCodes.get(position).getCountryCode();
+                binding.countryCodeSp.setSelection(position);
+                binding.countryCodeSp.setPrompt(countryCode);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 }
