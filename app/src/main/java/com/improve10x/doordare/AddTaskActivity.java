@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.base.BaseActivity;
+import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
 import com.improve10x.doordare.base.task.Dare;
 import com.improve10x.doordare.base.task.Do;
@@ -43,6 +44,10 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Add Task");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getIntent().hasExtra(Constants.KEY_TASK)) {
+            task = (Task) getIntent().getSerializableExtra(Constants.KEY_TASK);
+            showData();
+        }
         handleCalendar();
         handleSaveBtn();
     }
@@ -172,5 +177,14 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
                 showToast("Dare not including all spaces");
             }
         }
+    }
+
+    private void showData() {
+        binding.doTxt.setText(task.doItem.title);
+        binding.dareTxt.setText(task.dare.title);
+        Date date = new Date(task.dare.deadlineTimestamp);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
+        String displayDeadline = dateFormat.format(date);
+        binding.deadlineTxt.setText(displayDeadline);
     }
 }

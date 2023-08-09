@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.improve10x.doordare.Notification;
+import com.improve10x.doordare.OnEditActionListener;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.PendingItemBinding;
@@ -26,6 +27,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     private CountDownTimer[] timers;
     private OnItemActionListener onItemActionListener;
     private OnTimeActionListener onTimeActionListener;
+    private OnEditActionListener onEditActionListener;
 
     void setData(List<Task> tasks) {
         this.tasks = tasks;
@@ -52,6 +54,10 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         this.onTimeActionListener = onTimeActionListener;
     }
 
+    void setOnEditActionListener(OnEditActionListener onEditActionListener) {
+        this.onEditActionListener = onEditActionListener;
+    }
+
     @NonNull
     @Override
     public PendingTaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -70,6 +76,9 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         timeSetting(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
+        });
+        holder.binding.editBtn.setOnClickListener(view -> {
+            onEditActionListener.onEdit(task);
         });
         setReducedTimeAndColors(holder, task, position);
     }

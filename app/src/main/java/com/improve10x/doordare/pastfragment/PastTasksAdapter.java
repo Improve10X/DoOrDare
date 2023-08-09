@@ -2,6 +2,7 @@ package com.improve10x.doordare.pastfragment;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
+        showDeleteBtn(holder);
         holder.binding.deleteBtn.setOnClickListener(v -> {
             onDeleteActionListener.onDelete(task.id);
         });
@@ -92,5 +94,15 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#8BC34A"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#8BC34A"));
         }
+    }
+
+    private void showDeleteBtn(PastTaskViewHolder holder) {
+        holder.binding.getRoot().setOnLongClickListener(v -> {
+            holder.binding.deleteBtn.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(() -> {
+                holder.binding.deleteBtn.setVisibility(View.INVISIBLE);
+            }, 3000);
+            return true;
+        });
     }
 }
