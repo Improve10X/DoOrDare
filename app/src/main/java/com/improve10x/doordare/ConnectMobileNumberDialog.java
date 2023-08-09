@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
         binding = DialogConnectMobileNumberBinding.inflate(getLayoutInflater());
         handleSendOTP();
         handleConfirm();
+        setupSpinner();
         return binding.getRoot();
     }
 
@@ -349,5 +351,10 @@ public class ConnectMobileNumberDialog extends DialogFragment {
         countryCodes.add(new CountryCode("Zambia", "+260"));
         countryCodes.add(new CountryCode("Zimbabwe", "+263"));
         return countryCodes;
+    }
+
+    private void setupSpinner() {
+        CountryCodesAdapter adapter = new CountryCodesAdapter(getContext(), R.layout.country_code_item, getCountryCodes());
+        binding.countryCodeSp.setAdapter(adapter);
     }
 }
