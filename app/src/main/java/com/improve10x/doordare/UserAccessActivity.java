@@ -1,11 +1,8 @@
 package com.improve10x.doordare;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.databinding.ActivityUserAccessBinding;

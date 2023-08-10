@@ -1,13 +1,10 @@
 package com.improve10x.doordare;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,7 +15,6 @@ import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
 import com.improve10x.doordare.base.task.Task;
-import com.improve10x.doordare.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
