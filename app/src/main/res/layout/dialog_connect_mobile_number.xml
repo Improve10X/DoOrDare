@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:minWidth="340dp"
-    android:padding="16dp">
+    android:padding="12dp">
 
 
     <Button
@@ -25,11 +25,10 @@
 
     <EditText
         android:id="@+id/mobile_number_txt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:hint="Mobile Number"
-        android:inputType="phone"
+        android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/textView8"
         app:layout_constraintStart_toStartOf="@+id/textView8"
         app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -37,9 +36,8 @@
 
     <EditText
         android:id="@+id/otp_txt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:hint="OTP"
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="@+id/textView9"
@@ -59,19 +57,11 @@
         app:strokeColor="@color/orange"
         app:strokeWidth="1dp" />
 
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="visible"
-        app:constraint_referenced_ids="textInputLayout4,confirm_btn" />
-
     <Spinner
         android:id="@+id/country_code_sp"
-        style="@style/FirebaseUI.CountrySpinner"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="@+id/textView6"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
@@ -81,19 +71,16 @@
         android:id="@+id/textView6"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:text="Select Country Code"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/textView8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Enter  your Mobile Number"
+        android:text="Enter your mobile number"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="@+id/country_code_sp"
         app:layout_constraintStart_toStartOf="@+id/country_code_sp"
@@ -110,5 +97,11 @@
         app:layout_constraintStart_toStartOf="@+id/mobile_number_txt"
         app:layout_constraintTop_toBottomOf="@+id/send_otp_btn" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="confirm_btn,textView9,otp_txt" />
 
+</androidx.constraintlayout.widget.ConstraintLayout>

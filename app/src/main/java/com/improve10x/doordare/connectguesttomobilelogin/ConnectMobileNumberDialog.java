@@ -1,4 +1,4 @@
-package com.improve10x.doordare;
+package com.improve10x.doordare.connectguesttomobilelogin;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.improve10x.doordare.R;
 import com.improve10x.doordare.databinding.DialogConnectMobileNumberBinding;
 
 import java.util.ArrayList;
@@ -88,22 +88,26 @@ public class ConnectMobileNumberDialog extends DialogFragment {
     private void handleConfirm() {
         binding.confirmBtn.setOnClickListener(v -> {
             String otp = binding.otpTxt.getText().toString();
-            PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otp);
-            firebaseAuth.getCurrentUser().linkWithCredential(credential)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @SuppressLint("LongLogTag")
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                Log.w(TAG, "LinkWithCredential:Success");
-                                Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
-                                dismiss();
-                            } else {
-                                Log.w(TAG, "LinkWithCredential:Failure", task.getException());
-                                Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+            if (!otp.isEmpty()) {
+                PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otp);
+                firebaseAuth.getCurrentUser().linkWithCredential(credential)
+                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @SuppressLint("LongLogTag")
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    Log.w(TAG, "LinkWithCredential:Success");
+                                    Toast.makeText(getContext(), "Success", Toast.LENGTH_SHORT).show();
+                                    dismiss();
+                                } else {
+                                    Log.w(TAG, "LinkWithCredential:Failure", task.getException());
+                                    Toast.makeText(getContext(), "Failure", Toast.LENGTH_SHORT).show();
+                                }
                             }
-                        }
-                    });
+                        });
+            } else {
+                Toast.makeText(getContext(), "Enter OTP", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
