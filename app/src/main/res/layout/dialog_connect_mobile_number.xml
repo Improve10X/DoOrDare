@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:minWidth="340dp"
     android:padding="16dp">
@@ -29,10 +29,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minEms="10"
+        app:layout_constraintBottom_toTopOf="@+id/send_otp_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/country_code_sp"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="@+id/country_code_sp"
+        app:layout_constraintTop_toBottomOf="@+id/country_code_sp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/mobile_number_txt"
@@ -85,13 +86,15 @@
 
     <Spinner
         android:id="@+id/country_code_sp"
-        android:layout_width="wrap_content"
+        style="@style/FirebaseUI.CountrySpinner"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout3"
-        app:layout_constraintEnd_toStartOf="@+id/textInputLayout3"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout3" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

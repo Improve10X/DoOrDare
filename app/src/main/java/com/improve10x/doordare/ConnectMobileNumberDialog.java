@@ -33,6 +33,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
     private final FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
     private String verificationId;
     private static final String TAG = "ConnectWithMobileNumberDialog";
+    private String countryCode;
 
     @Nullable
     @Override
@@ -49,7 +50,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
             String phoneNumber = binding.mobileNumberTxt.getText().toString();
             if (!phoneNumber.isEmpty()) {
                 PhoneAuthOptions phoneAuthOptions = PhoneAuthOptions.newBuilder(firebaseAuth)
-                        .setPhoneNumber(phoneNumber)
+                        .setPhoneNumber(countryCode + phoneNumber)
                         .setTimeout(60L, TimeUnit.SECONDS)
                         .setActivity(getActivity())
                         .setCallbacks(createCallbacksObject())
@@ -361,7 +362,7 @@ public class ConnectMobileNumberDialog extends DialogFragment {
         binding.countryCodeSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String countryCode = countryCodes.get(position).getCountryCode();
+                countryCode = countryCodes.get(position).getCountryCode();
                 binding.countryCodeSp.setSelection(position);
                 binding.countryCodeSp.setPrompt(countryCode);
             }
