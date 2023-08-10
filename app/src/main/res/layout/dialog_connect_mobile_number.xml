@@ -8,72 +8,54 @@
     android:minWidth="340dp"
     android:padding="16dp">
 
+
     <Button
         android:id="@+id/send_otp_btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_weight="1"
+        android:layout_marginTop="8dp"
         android:text="Send OTP"
         android:textColor="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3"
+        app:layout_constraintEnd_toEndOf="@+id/mobile_number_txt"
+        app:layout_constraintStart_toStartOf="@+id/mobile_number_txt"
+        app:layout_constraintTop_toBottomOf="@+id/mobile_number_txt"
         app:strokeColor="@color/orange"
         app:strokeWidth="1dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:minEms="10"
-        app:layout_constraintBottom_toTopOf="@+id/send_otp_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="@+id/country_code_sp"
-        app:layout_constraintTop_toBottomOf="@+id/country_code_sp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/mobile_number_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your mobile number"
-            android:inputType="phone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/mobile_number_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:minEms="300"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout3"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/send_otp_btn">
+        android:layout_marginTop="8dp"
+        android:hint="Mobile Number"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="@+id/textView8"
+        app:layout_constraintStart_toStartOf="@+id/textView8"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/otp_txt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter OTP"
-            android:inputType="number" />
 
-    </com.google.android.material.textfield.TextInputLayout>
+    <EditText
+        android:id="@+id/otp_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="OTP"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="@+id/textView9"
+        app:layout_constraintStart_toStartOf="@+id/textView9"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <Button
         android:id="@+id/confirm_btn"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:text="Confirm"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintEnd_toEndOf="@+id/otp_txt"
+        app:layout_constraintStart_toStartOf="@+id/otp_txt"
+        app:layout_constraintTop_toBottomOf="@+id/otp_txt"
         app:strokeColor="@color/orange"
         app:strokeWidth="1dp" />
 
@@ -81,7 +63,7 @@
         android:id="@+id/group"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="visible"
         app:constraint_referenced_ids="textInputLayout4,confirm_btn" />
 
     <Spinner
@@ -89,12 +71,44 @@
         style="@style/FirebaseUI.CountrySpinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView6"
+        app:layout_constraintStart_toStartOf="@+id/textView6"
+        app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_chainStyle="packed" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Select Country Code"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Enter  your Mobile Number"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/country_code_sp"
+        app:layout_constraintStart_toStartOf="@+id/country_code_sp"
+        app:layout_constraintTop_toBottomOf="@+id/country_code_sp" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Enter OTP"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/mobile_number_txt"
+        app:layout_constraintStart_toStartOf="@+id/mobile_number_txt"
+        app:layout_constraintTop_toBottomOf="@+id/send_otp_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
