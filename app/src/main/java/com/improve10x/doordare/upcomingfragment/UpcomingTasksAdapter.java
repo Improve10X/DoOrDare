@@ -45,7 +45,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
         String dareHtml = "<b>Dare :</b> " + task.dare.title;
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
-        timeSetting(holder, task);
+        setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
@@ -57,7 +57,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         return tasks.size();
     }
 
-    private void timeSetting(UpcomingTaskViewHolder holder, Task task) {
+    private void setTime(UpcomingTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");

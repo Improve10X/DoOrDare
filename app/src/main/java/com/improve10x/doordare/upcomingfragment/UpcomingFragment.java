@@ -1,6 +1,5 @@
 package com.improve10x.doordare.upcomingfragment;
 
-//import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -25,10 +24,7 @@ import com.improve10x.doordare.TaskDetailsActivity;
 import com.improve10x.doordare.databinding.FragmentUpcomingBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class UpcomingFragment extends Fragment {
@@ -89,7 +85,7 @@ public class UpcomingFragment extends Fragment {
                         if (task.isSuccessful()) {
                             hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
-                            if (tasks.isEmpty() == false) {
+                            if (!tasks.isEmpty()) {
                                 upcomingTasksAdapter.setData(tasks);
                                 dataScreen();
                             } else {
