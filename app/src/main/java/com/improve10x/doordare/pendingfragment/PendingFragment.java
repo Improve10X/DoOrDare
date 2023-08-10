@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.improve10x.doordare.AddTaskActivity;
 import com.improve10x.doordare.Notification;
@@ -60,7 +58,7 @@ public class PendingFragment extends Fragment {
 
     private void setupPendingTasksAdapter() {
         pendingTasksAdapter = new PendingTasksAdapter();
-        pendingTasksAdapter.setData(tasks);
+        pendingTasksAdapter.setTasks(tasks);
         pendingTasksAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Task task) {
@@ -102,8 +100,8 @@ public class PendingFragment extends Fragment {
                         hideProgressBar();
                         if (task.isSuccessful()) {
                             List<Task> tasks = task.getResult().toObjects(Task.class);
-                            if (tasks.isEmpty() == false) {
-                                pendingTasksAdapter.setData(tasks);
+                            if (!tasks.isEmpty()) {
+                                pendingTasksAdapter.setTasks(tasks);
                                 dataScreen();
                             } else {
                                 emptyScreen();
@@ -138,4 +136,3 @@ public class PendingFragment extends Fragment {
         binding.pendingTasksRv.setVisibility(View.VISIBLE);
     }
 }
-

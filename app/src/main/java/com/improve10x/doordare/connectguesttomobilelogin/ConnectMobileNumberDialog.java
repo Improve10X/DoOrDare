@@ -373,7 +373,6 @@ public class ConnectMobileNumberDialog extends DialogFragment {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }

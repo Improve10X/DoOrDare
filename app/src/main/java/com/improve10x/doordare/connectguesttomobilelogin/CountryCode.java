@@ -1,7 +1,5 @@
 package com.improve10x.doordare.connectguesttomobilelogin;
 
-import java.util.ArrayList;
-
 public class CountryCode {
 
     private String countryName;
@@ -21,15 +19,7 @@ public class CountryCode {
         return countryName;
     }
 
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
-    }
-
     public String getCountryCode() {
         return countryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
     }
 }
