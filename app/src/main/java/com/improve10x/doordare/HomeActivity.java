@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.improve10x.doordare.connectguesttomobilelogin.ConnectMobileNumberDialog;
 import com.improve10x.doordare.ui.main.SectionsPagerAdapter;
 import com.improve10x.doordare.databinding.ActivityHomeBinding;
@@ -43,6 +45,11 @@ HomeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home_menu, menu);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if(!user.isAnonymous()) {
+            MenuItem item = menu.findItem(R.id.connect_with_mobile_number);
+            item.setVisible(false);
+        }
         return true;
     }
 
@@ -51,7 +58,7 @@ HomeActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.logout) {
             showSignOutDialog();
             return true;
-        } else if (item.getItemId() == R.id.login_wthin_mobile_name) {
+        } else if (item.getItemId() == R.id.connect_with_mobile_number) {
             new ConnectMobileNumberDialog().show(getSupportFragmentManager(), "Connect with Mobile Number");
             return true;
         } else {
