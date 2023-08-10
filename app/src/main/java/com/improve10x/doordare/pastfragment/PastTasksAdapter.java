@@ -1,6 +1,5 @@
 package com.improve10x.doordare.pastfragment;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Handler;
 import android.text.Html;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.doordare.R;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.PastTaskItemBinding;
@@ -26,7 +24,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
     private OnItemActionListener onItemActionListener;
     private OnDeleteActionListener onDeleteActionListener;
 
-    void setData(List<Task> tasks) {
+    void setTasks(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
     }
@@ -54,7 +52,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
         String dareHtml = "<b>Dare :</b> " + task.dare.title;
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
-        timeSetting(holder, task);
+        setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
@@ -62,7 +60,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.deleteBtn.setOnClickListener(v -> {
             onDeleteActionListener.onDelete(task.id);
         });
-        setReducedTimeAndColors(holder, task);
+        setColors(holder, task);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         return tasks.size();
     }
 
-    private void timeSetting(PastTaskViewHolder holder, Task task) {
+    private void setTime(PastTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
@@ -84,7 +82,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         holder.binding.monthAndYearTxt.setText(monthYear);
     }
 
-    private void setReducedTimeAndColors(PastTaskViewHolder holder, Task task) {
+    private void setColors(PastTaskViewHolder holder, Task task) {
         if (task.status.equalsIgnoreCase("Do Completed")) {
             holder.binding.reducedTimeTxt.setText("Do Completed");
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#2B7A0B"));

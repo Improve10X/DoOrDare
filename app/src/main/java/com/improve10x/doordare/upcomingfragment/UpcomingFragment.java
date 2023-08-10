@@ -51,7 +51,7 @@ public class UpcomingFragment extends Fragment {
 
     private void setupUpcomingTasksAdapter() {
         upcomingTasksAdapter = new UpcomingTasksAdapter();
-        upcomingTasksAdapter.setData(tasks);
+        upcomingTasksAdapter.setTasks(tasks);
         upcomingTasksAdapter.setOnItemActionListener(new OnItemActionListener() {
             @Override
             public void onItemClicked(Task task) {
@@ -86,7 +86,7 @@ public class UpcomingFragment extends Fragment {
                             hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
                             if (!tasks.isEmpty()) {
-                                upcomingTasksAdapter.setData(tasks);
+                                upcomingTasksAdapter.setTasks(tasks);
                                 dataScreen();
                             } else {
                                 emptyScreen();

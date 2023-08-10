@@ -21,7 +21,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
     private List<Task> tasks;
     private OnItemActionListener onItemActionListener;
 
-    void setData(List<Task> tasks) {
+    void setTasks(List<Task> tasks) {
         this.tasks = tasks;
         notifyDataSetChanged();
     }
