@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.OnEditActionListener;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
@@ -17,7 +16,6 @@ import com.improve10x.doordare.databinding.PendingItemBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     private OnTimeActionListener onTimeActionListener;
     private OnEditActionListener onEditActionListener;
 
-    void setData(List<Task> tasks) {
+    void setTasks(List<Task> tasks) {
         this.tasks = tasks;
         cancelTimers();
         timers = new CountDownTimer[tasks.size()];
@@ -73,7 +71,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
         String dareHtml = "<b>Dare :</b> " + task.dare.title;
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
-        timeSetting(holder, task);
+        setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
@@ -88,7 +86,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         return tasks.size();
     }
 
-    private void timeSetting(PendingTaskViewHolder holder, Task task) {
+    private void setTime(PendingTaskViewHolder holder, Task task) {
         long doTimestamp = task.doItem.deadlineTimestamp;
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
@@ -115,6 +113,10 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#F57C00"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#F57C00"));
         }
+        setReducedTime(holder, task, position, diffInMillis);
+    }
+
+    private void setReducedTime(PendingTaskViewHolder holder, Task task, int position, long diffInMillis) {
         if (diffInMillis <= 0) {
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
         } else if (diffInMillis < 10 * 60 *1000) {
