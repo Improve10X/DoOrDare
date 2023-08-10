@@ -81,24 +81,24 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
 
     private void addTask(String doTitle, String dareTitle) {
         Task task = new Task();
-        task.doItem = new Do();
-        task.doItem.title = doTitle;
-        task.doItem.status = "Pending";
-        task.doItem.deadlineTimestamp = doDeadlineTimestamp;
-        task.dare = new Dare();
-        task.dare.title = dareTitle;
-        task.dare.status = "Not Needed";
-        task.createdTimestamp = System.currentTimeMillis();
-        task.status = "Pending";
+        task.setDoItem(new Do());
+        task.getDoItem().setTitle(doTitle);
+        task.getDoItem().setStatus("Pending");
+        task.getDoItem().setDeadlineTimestamp(doDeadlineTimestamp);
+        task.setDare(new Dare());
+        task.getDare().setTitle(dareTitle);
+        task.getDare().setStatus("Not Needed");
+        task.setCreatedTimestamp(System.currentTimeMillis());
+        task.setStatus("Pending");
         addTask(task);
     }
 
     private void addTask(Task task) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        task.id = db.collection("tasks").document().getId();
+        task.setId(db.collection("tasks").document().getId());
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/tasks")
-                .document(task.id)
+                .document(task.getId())
                 .set(task)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -173,9 +173,9 @@ public class AddTaskActivity extends BaseActivity implements CustomDateTimePicke
     }
 
     private void showData() {
-        binding.doTxt.setText(task.doItem.title);
-        binding.dareTxt.setText(task.dare.title);
-        Date date = new Date(task.dare.deadlineTimestamp);
+        binding.doTxt.setText(task.getDoItem().getTitle());
+        binding.dareTxt.setText(task.getDare().getTitle());
+        Date date = new Date(task.getDare().getDeadlineTimestamp());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
         String displayDeadline = dateFormat.format(date);
         binding.deadlineTxt.setText(displayDeadline);

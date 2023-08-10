@@ -41,9 +41,9 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
     @Override
     public void onBindViewHolder(@NonNull UpcomingTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
-        String doHtml = "<b>Do :</b> " + task.doItem.title;
+        String doHtml = "<b>Do :</b> " + task.getDoItem().getTitle();
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
-        String dareHtml = "<b>Dare :</b> " + task.dare.title;
+        String dareHtml = "<b>Dare :</b> " + task.getDare().getTitle();
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
         setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
@@ -58,7 +58,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
     }
 
     private void setTime(UpcomingTaskViewHolder holder, Task task) {
-        long doTimestamp = task.doItem.deadlineTimestamp;
+        long doTimestamp = task.getDoItem().getDeadlineTimestamp();
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
         String timeText = timeFormat.format(date);
@@ -73,7 +73,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
 
     private void setReducedTime(UpcomingTaskViewHolder holder, Task task) {
         long currentTimeInMillis = System.currentTimeMillis();
-        long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
+        long diffInMillis = task.getDoItem().getDeadlineTimestamp() - currentTimeInMillis;
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
         holder.binding.reducedTimeTxt.setText(timeLeft + "left");
     }

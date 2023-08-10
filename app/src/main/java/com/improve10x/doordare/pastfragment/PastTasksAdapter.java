@@ -48,9 +48,9 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull PastTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
-        String doHtml = "<b>Do :</b> " + task.doItem.title;
+        String doHtml = "<b>Do :</b> " + task.getDoItem().getTitle();
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
-        String dareHtml = "<b>Dare :</b> " + task.dare.title;
+        String dareHtml = "<b>Dare :</b> " + task.getDare().getTitle();
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
         setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
@@ -58,7 +58,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
         });
         showDeleteBtn(holder);
         holder.binding.deleteBtn.setOnClickListener(v -> {
-            onDeleteActionListener.onDelete(task.id);
+            onDeleteActionListener.onDelete(task.getId());
         });
         setColors(holder, task);
     }
@@ -69,7 +69,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
     }
 
     private void setTime(PastTaskViewHolder holder, Task task) {
-        long doTimestamp = task.doItem.deadlineTimestamp;
+        long doTimestamp = task.getDoItem().getDeadlineTimestamp();
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh aa");
         String timeText = timeFormat.format(date);
@@ -83,7 +83,7 @@ public class PastTasksAdapter extends RecyclerView.Adapter<PastTaskViewHolder> {
     }
 
     private void setColors(PastTaskViewHolder holder, Task task) {
-        if (task.status.equalsIgnoreCase("Do Completed")) {
+        if (task.getStatus().equalsIgnoreCase("Do Completed")) {
             holder.binding.reducedTimeTxt.setText("Do Completed");
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#2B7A0B"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#2B7A0B"));
