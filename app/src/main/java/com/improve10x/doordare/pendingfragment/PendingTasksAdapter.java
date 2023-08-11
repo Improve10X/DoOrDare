@@ -2,8 +2,10 @@ package com.improve10x.doordare.pendingfragment;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -75,6 +77,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
+        showEditBtn(holder);
         holder.binding.editBtn.setOnClickListener(view -> {
             onEditActionListener.onEdit(task);
         });
@@ -143,5 +146,15 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
                 holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
                 onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.getDoItem().getTitle());            }
         };
+    }
+
+    private void showEditBtn(PendingTaskViewHolder holder) {
+       holder.binding.getRoot().setOnLongClickListener(v -> {
+           holder.binding.editBtn.setVisibility(View.VISIBLE);
+           new Handler().postDelayed(() -> {
+              holder.binding.editBtn.setVisibility(View.GONE);
+           }, 3000);
+          return true;
+       });
     }
 }
