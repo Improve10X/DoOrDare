@@ -26,7 +26,7 @@ import java.util.Date;
 public class BaseAddEditTaskActivity extends BaseActivity implements CustomDateTimePicker.ICustomDateTimeListener {
 
     protected ActivityBaseAddEditTaskBinding binding;
-    long doDeadlineTimestamp = 0l;
+    protected long doDeadlineTimestamp = 0l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -109,7 +109,7 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="false"
             android:backgroundTint="@color/white"
-            android:visibility="invisible"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/outline_edit_24" />
