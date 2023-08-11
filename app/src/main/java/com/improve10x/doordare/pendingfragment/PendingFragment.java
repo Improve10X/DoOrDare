@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.improve10x.doordare.AddTaskActivity;
+import com.improve10x.doordare.BaseAddEditTaskActivity;
 import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.base.OnItemActionListener;
@@ -69,7 +69,7 @@ public class PendingFragment extends Fragment {
             Notification.pushNotification(getContext(), notificationTitle, notificationMsg);
         });
         pendingTasksAdapter.setOnEditActionListener(task -> {
-           Intent intent = new Intent(getContext(), AddTaskActivity.class);
+           Intent intent = new Intent(getContext(), BaseAddEditTaskActivity.class);
            intent.putExtra(Constants.KEY_TASK, task);
            startActivity(intent);
         });
@@ -113,7 +113,7 @@ public class PendingFragment extends Fragment {
 
     private void handleFab() {
         binding.fab.setOnClickListener(view -> {
-            Intent intent = new Intent(getActivity(), AddTaskActivity.class);
+            Intent intent = new Intent(getActivity(), BaseAddEditTaskActivity.class);
             startActivity(intent);
         });
     }

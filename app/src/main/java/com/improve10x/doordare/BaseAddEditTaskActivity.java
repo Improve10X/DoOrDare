@@ -14,26 +14,26 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
-import com.improve10x.doordare.databinding.ActivityAddTaskBinding;
 import com.improve10x.doordare.base.task.Dare;
 import com.improve10x.doordare.base.task.Do;
 import com.improve10x.doordare.base.task.Task;
+import com.improve10x.doordare.databinding.ActivityBaseAddEditTaskBinding;
 import com.noowenz.customdatetimepicker.CustomDateTimePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class AddTaskActivity extends BaseActivity implements CustomDateTimePicker.ICustomDateTimeListener {
+public class BaseAddEditTaskActivity extends BaseActivity implements CustomDateTimePicker.ICustomDateTimeListener {
 
-    private ActivityAddTaskBinding binding;
+    private ActivityBaseAddEditTaskBinding binding;
     private Task task;
     long doDeadlineTimestamp = 0l;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityAddTaskBinding.inflate(getLayoutInflater());
+        binding = ActivityBaseAddEditTaskBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         getSupportActionBar().setTitle("Add Task");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
