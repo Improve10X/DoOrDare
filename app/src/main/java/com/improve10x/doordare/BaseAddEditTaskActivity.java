@@ -7,15 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.improve10x.doordare.base.BaseActivity;
-import com.improve10x.doordare.base.task.Dare;
-import com.improve10x.doordare.base.task.Do;
-import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.ActivityBaseAddEditTaskBinding;
 import com.noowenz.customdatetimepicker.CustomDateTimePicker;
 
@@ -75,14 +67,39 @@ public class BaseAddEditTaskActivity extends BaseActivity implements CustomDateT
         }
     }
 
-    protected boolean isAllSpaces(String text) {
-        int spaceChars = 0;
-        for (int i = 0; i < text.length(); i++) {
-            char c = text.charAt(i);
-            if (c == ' ') {
-                spaceChars++;
-            }
+    protected boolean isValidTask(String doTitle, String dareTitle, long doDeadlineTimestamp) {
+        return !doTitle.trim().isEmpty() && !dareTitle.trim().equals("") && doDeadlineTimestamp != 0;
+    }
+
+    protected void invalidTask(String doTitle, String dareTitle, long doDeadlineTimestamp) {
+        if (doTitle.equals("") == false && dareTitle.equals("") == true && doDeadlineTimestamp == 0) {
+            showToast("Fill Dare and Deadline");
+        } else if (doTitle.equals("") == false && dareTitle.equals("") == false && doDeadlineTimestamp == 0) {
+            showToast("Fill Deadline");
+        } else if (doTitle.equals("") == false && doDeadlineTimestamp != 0 && dareTitle.equals("") == true) {
+            showToast("Fill Dare");
+        } else if (dareTitle.equals("") == false && doTitle.equals("") == true && doDeadlineTimestamp == 0) {
+            showToast("Fill Do and Deadline");
+        } else if (dareTitle.equals("") == false && doDeadlineTimestamp != 0 && doTitle.equals("") == true) {
+            showToast("Fill the Do");
+        } else if (doDeadlineTimestamp != 0 && doTitle.equals("") == true && dareTitle.equals("") == true) {
+            showToast("Fill the Do and dare");
+        } else if (isAllSpaces(doTitle) && isAllSpaces(dareTitle)) {
+            binding.doTxt.setText("");
+            binding.dareTxt.setText("");
+            showToast("Do and dare not including all spaces");
+        } else if (isAllSpaces(doTitle) && !isAllSpaces(dareTitle)) {
+            binding.doTxt.setText("");
+            showToast("Do not including all spaces");
+        } else if (!isAllSpaces(doTitle) && isAllSpaces(dareTitle)){
+            binding.dareTxt.setText("");
+            showToast("Dare not including all spaces");
+        } else {
+            showToast("Fill Do, Dare and deadline");
         }
-        return spaceChars == text.length();
+    }
+
+    protected boolean isAllSpaces(String text) {
+        return text.trim().length() == 0;
     }
 }

@@ -26,22 +26,10 @@ public class AddTaskActivity extends BaseAddEditTaskActivity {
         binding.saveBtn.setOnClickListener(view -> {
             String doTitle = binding.doTxt.getText().toString();
             String dareTitle = binding.dareTxt.getText().toString();
-            if (doTitle.equals("") == false && dareTitle.equals("") == false && doDeadlineTimestamp != 0) {
-                handleTask(doTitle, dareTitle);
-            } else if (doTitle.equals("") == false && dareTitle.equals("") == true && doDeadlineTimestamp == 0) {
-                showToast("Fill Dare and Deadline");
-            } else if (doTitle.equals("") == false && dareTitle.equals("") == false && doDeadlineTimestamp == 0) {
-                showToast("Fill Deadline");
-            } else if (doTitle.equals("") == false && doDeadlineTimestamp != 0 && dareTitle.equals("") == true) {
-                showToast("Fill Dare");
-            } else if (dareTitle.equals("") == false && doTitle.equals("") == true && doDeadlineTimestamp == 0) {
-                showToast("Fill Do and Deadline");
-            } else if (dareTitle.equals("") == false && doDeadlineTimestamp != 0 && doTitle.equals("") == true) {
-                showToast("Fill the Do");
-            } else if (doDeadlineTimestamp != 0 && doTitle.equals("") == true && dareTitle.equals("") == true) {
-                showToast("Fill the Do and dare");
+            if (isValidTask(doTitle, dareTitle, doDeadlineTimestamp)) {
+                addTask(doTitle, dareTitle);
             } else {
-                showToast("Fill Do, Dare and deadline");
+                invalidTask(doTitle, dareTitle, doDeadlineTimestamp);
             }
         });
     }
@@ -79,24 +67,5 @@ public class AddTaskActivity extends BaseAddEditTaskActivity {
                         showToast("Failed to Add Task");
                     }
                 });
-    }
-
-    private void handleTask(String doTitle, String dareTitle) {
-        if (!isAllSpaces(doTitle) && !isAllSpaces(dareTitle)) {
-            addTask(doTitle, dareTitle);
-            finish();
-        } else {
-            if (isAllSpaces(doTitle) && isAllSpaces(dareTitle)) {
-                binding.doTxt.setText("");
-                binding.dareTxt.setText("");
-                showToast("Do and dare not including all spaces");
-            } else if (isAllSpaces(doTitle) && !isAllSpaces(dareTitle)) {
-                binding.doTxt.setText("");
-                showToast("Do not including all spaces");
-            } else if (!isAllSpaces(doTitle) && isAllSpaces(dareTitle)){
-                binding.dareTxt.setText("");
-                showToast("Dare not including all spaces");
-            }
-        }
     }
 }

@@ -32,7 +32,14 @@ public class EditTaskActivity extends BaseAddEditTaskActivity {
 
     private void handleEdit() {
         binding.saveBtn.setOnClickListener(v -> {
-            updateTask(task);
+            task.getDoItem().setTitle(binding.doTxt.getText().toString());
+            task.getDare().setTitle(binding.dareTxt.getText().toString());
+            task.getDoItem().setDeadlineTimestamp(doDeadlineTimestamp);
+            if (isValidTask(task.getDoItem().getTitle(), task.getDare().getTitle(), task.getDoItem().getDeadlineTimestamp())) {
+                updateTask(task);
+            } else {
+                invalidTask(task.getDoItem().getTitle(), task.getDare().getTitle(), task.getDoItem().getDeadlineTimestamp());
+            }
         });
     }
 
@@ -40,16 +47,14 @@ public class EditTaskActivity extends BaseAddEditTaskActivity {
         binding.saveBtn.setText("Edit");
         binding.doTxt.setText(task.getDoItem().getTitle());
         binding.dareTxt.setText(task.getDare().getTitle());
-        Date date = new Date(task.getDoItem().getDeadlineTimestamp());
+        doDeadlineTimestamp = task.getDoItem().getDeadlineTimestamp();
+        Date date = new Date(doDeadlineTimestamp);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy hh:mm aa");
         String displayDeadline = dateFormat.format(date);
         binding.deadlineTxt.setText(displayDeadline);
     }
 
     private void updateTask(Task task) {
-        task.getDoItem().setTitle(binding.doTxt.getText().toString());
-        task.getDare().setTitle(binding.dareTxt.getText().toString());
-        task.getDoItem().setDeadlineTimestamp(doDeadlineTimestamp);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/tasks")
