@@ -16,15 +16,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.improve10x.doordare.AddTaskActivity;
-import com.improve10x.doordare.BaseAddEditTaskActivity;
-import com.improve10x.doordare.EditTaskActivity;
+import com.improve10x.doordare.addandedittask.AddTaskActivity;
+import com.improve10x.doordare.addandedittask.EditTaskActivity;
 import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
-import com.improve10x.doordare.databinding.FragmentPendingBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.util.ArrayList;
