@@ -67,9 +67,9 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     @Override
     public void onBindViewHolder(@NonNull PendingTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
-        String doHtml = "<b>Do :</b> " + task.doItem.title;
+        String doHtml = "<b>Do :</b> " + task.getDoItem().getTitle();
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
-        String dareHtml = "<b>Dare :</b> " + task.dare.title;
+        String dareHtml = "<b>Dare :</b> " + task.getDare().getTitle();
         holder.binding.dareTxt.setText(Html.fromHtml(dareHtml));
         setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
@@ -87,7 +87,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     }
 
     private void setTime(PendingTaskViewHolder holder, Task task) {
-        long doTimestamp = task.doItem.deadlineTimestamp;
+        long doTimestamp = task.getDoItem().getDeadlineTimestamp();
         Date date = new Date(doTimestamp);
         SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm aa");
         String timeText = timeFormat.format(date);
@@ -102,7 +102,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
 
     private void setReducedTimeAndColors(PendingTaskViewHolder holder, Task task, int position) {
         long currentTimeInMillis = System.currentTimeMillis();
-        long diffInMillis = task.doItem.deadlineTimestamp - currentTimeInMillis;
+        long diffInMillis = task.getDoItem().getDeadlineTimestamp() - currentTimeInMillis;
         if (diffInMillis < 3600000) {
             holder.binding.reducedTimeTxt.setBackgroundColor(Color.parseColor("#FF0000"));
             holder.binding.materialCardView.setStrokeColor(Color.parseColor("#FF0000"));
@@ -141,7 +141,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             @Override
             public void onFinish() {
                 holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-                onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.doItem.title);            }
+                onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.getDoItem().getTitle());            }
         };
     }
 }

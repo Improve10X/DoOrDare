@@ -1,13 +1,10 @@
 package com.improve10x.doordare;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,7 +15,6 @@ import com.improve10x.doordare.base.BaseActivity;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.databinding.ActivityTaskDetailsBinding;
 import com.improve10x.doordare.base.task.Task;
-import com.improve10x.doordare.utils.DateUtils;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -51,19 +47,19 @@ public class TaskDetailsActivity extends BaseActivity {
     }
 
     private void showData() {
-        binding.doTxt.setText(task.doItem.title);
-        binding.dareTxt.setText(task.dare.title);
-        long deadline = task.doItem.deadlineTimestamp;
+        binding.doTxt.setText(task.getDoItem().getTitle());
+        binding.dareTxt.setText(task.getDare().getTitle());
+        long deadline = task.getDoItem().getDeadlineTimestamp();
         Date date = new Date(deadline);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy, hh:mm aa");
         String deadlineTxt = simpleDateFormat.format(date);
         binding.deadlineTxt.setText(deadlineTxt);
-        binding.statusTxt.setText(task.status);
-        if (task.status.equalsIgnoreCase("Pending")) {
+        binding.statusTxt.setText(task.getStatus());
+        if (task.getStatus().equalsIgnoreCase("Pending")) {
             pendingStatus();
-        } else if (task.status.equalsIgnoreCase("Do Completed")) {
+        } else if (task.getStatus().equalsIgnoreCase("Do Completed")) {
             doCompletedStatus();
-        } else if (task.status.equalsIgnoreCase("Dare Completed")) {
+        } else if (task.getStatus().equalsIgnoreCase("Dare Completed")) {
             dareCompletedStatus();
         }
     }
@@ -73,9 +69,9 @@ public class TaskDetailsActivity extends BaseActivity {
         binding.materialCardView.setVisibility(View.GONE);
         handleTaskCompletedBtn();
         long currentTimeInMillis = System.currentTimeMillis();
-        if (currentTimeInMillis < task.doItem.deadlineTimestamp) {
-            binding.statusTxt.setText(task.status);
-        } else if (currentTimeInMillis >= task.doItem.deadlineTimestamp) {
+        if (currentTimeInMillis < task.getDoItem().getDeadlineTimestamp()) {
+            binding.statusTxt.setText(task.getStatus());
+        } else if (currentTimeInMillis >= task.getDoItem().getDeadlineTimestamp()) {
             binding.statusTxt.setText("'Do' not completed");
             doNotCompletedStatus();
         }
@@ -106,8 +102,8 @@ public class TaskDetailsActivity extends BaseActivity {
 
     private void handleTaskCompletedBtn() {
         binding.doCompletedBtn.setOnClickListener(view -> {
-            task.doItem.status = "Completed";
-            task.status = "Do Completed";
+            task.getDoItem().setStatus("Completed");
+            task.setStatus("Do Completed");
             updateTask(task);
             doCompletedStatus();
         });
@@ -115,8 +111,8 @@ public class TaskDetailsActivity extends BaseActivity {
 
     private void handleDareCompletedBtn() {
         binding.dareCompletedBtn.setOnClickListener(view -> {
-            task.dare.status = "completed";
-            task.status = "Dare Completed";
+            task.getDare().setStatus("completed");
+            task.setStatus("Dare Completed");
             updateTask(task);
             dareCompletedStatus();
         });
@@ -126,7 +122,7 @@ public class TaskDetailsActivity extends BaseActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         db.collection("/users/" + user.getUid() + "/tasks")
-                .document(task.id)
+                .document(task.getId())
                 .set(task)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

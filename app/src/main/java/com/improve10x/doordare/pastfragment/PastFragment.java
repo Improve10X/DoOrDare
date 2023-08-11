@@ -51,7 +51,7 @@ public class PastFragment extends Fragment {
 
     private void setupPastTasksAdapter() {
         pastTasksAdapter = new PastTasksAdapter();
-        pastTasksAdapter.setData(tasks);
+        pastTasksAdapter.setTasks(tasks);
     }
 
     private void setupPastTasksRv() {
@@ -89,8 +89,8 @@ public class PastFragment extends Fragment {
                         if (task.isSuccessful()) {
                             hideProgressBar();
                             List<Task> tasks = task.getResult().toObjects(Task.class);
-                            if (tasks.isEmpty() == false) {
-                                pastTasksAdapter.setData(tasks);
+                            if (!tasks.isEmpty()) {
+                                pastTasksAdapter.setTasks(tasks);
                                 dataScreen();
                             } else {
                                 emptyScreen();
