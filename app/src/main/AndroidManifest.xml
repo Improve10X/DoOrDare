@@ -40,7 +40,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".AddTaskActivity"
+            android:name=".addandedittask.BaseAddEditTaskActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".addandedittask.AddTaskActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".addandedittask.EditTaskActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

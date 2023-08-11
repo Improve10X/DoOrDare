@@ -2,8 +2,10 @@ package com.improve10x.doordare.pendingfragment;
 
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -35,8 +37,8 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     }
 
     public void cancelTimers() {
-        if(timers != null) {
-            for (int i=0; i< timers.length; i++) {
+        if (timers != null) {
+            for (int i = 0; i < timers.length; i++) {
                 if (timers[i] != null) {
                     timers[i].cancel();
                 }
@@ -67,6 +69,8 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     @Override
     public void onBindViewHolder(@NonNull PendingTaskViewHolder holder, int position) {
         Task task = tasks.get(position);
+        long currentTimeInMillis = System.currentTimeMillis();
+        long diffInMillis = task.getDoItem().getDeadlineTimestamp() - currentTimeInMillis;
         String doHtml = "<b>Do :</b> " + task.getDoItem().getTitle();
         holder.binding.taskTxt.setText(Html.fromHtml(doHtml));
         String dareHtml = "<b>Dare :</b> " + task.getDare().getTitle();
@@ -75,6 +79,7 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
         });
+        showEditBtn(holder, diffInMillis);
         holder.binding.editBtn.setOnClickListener(view -> {
             onEditActionListener.onEdit(task);
         });
@@ -119,8 +124,8 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
     private void setReducedTime(PendingTaskViewHolder holder, Task task, int position, long diffInMillis) {
         if (diffInMillis <= 0) {
             holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-        } else if (diffInMillis < 10 * 60 *1000) {
-            if(timers[position] == null) {
+        } else if (diffInMillis < 10 * 60 * 1000) {
+            if (timers[position] == null) {
                 timers[position] = getTimer(diffInMillis, holder, task);
                 timers[position].start();
             }
@@ -141,7 +146,20 @@ public class PendingTasksAdapter extends RecyclerView.Adapter<PendingTaskViewHol
             @Override
             public void onFinish() {
                 holder.binding.reducedTimeTxt.setText("'Do' is not finished so complete 'Dare'");
-                onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.getDoItem().getTitle());            }
+                onTimeActionListener.showNotification("You haven't complete the do, Pls complete dare", task.getDoItem().getTitle());
+            }
         };
+    }
+
+    private void showEditBtn(PendingTaskViewHolder holder, long diffInMillis) {
+        holder.binding.getRoot().setOnLongClickListener(v -> {
+            if (diffInMillis > 0) {
+                holder.binding.editBtn.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(() -> {
+                    holder.binding.editBtn.setVisibility(View.GONE);
+                }, 3000);
+            }
+            return true;
+        });
     }
 }

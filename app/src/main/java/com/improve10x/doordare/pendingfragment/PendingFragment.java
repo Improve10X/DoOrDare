@@ -16,13 +16,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.improve10x.doordare.AddTaskActivity;
+import com.improve10x.doordare.addandedittask.AddTaskActivity;
+import com.improve10x.doordare.addandedittask.EditTaskActivity;
 import com.improve10x.doordare.Notification;
 import com.improve10x.doordare.base.Constants;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.TaskDetailsActivity;
-import com.improve10x.doordare.databinding.FragmentPendingBinding;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class PendingFragment extends Fragment {
             Notification.pushNotification(getContext(), notificationTitle, notificationMsg);
         });
         pendingTasksAdapter.setOnEditActionListener(task -> {
-           Intent intent = new Intent(getContext(), AddTaskActivity.class);
+           Intent intent = new Intent(getContext(), EditTaskActivity.class);
            intent.putExtra(Constants.KEY_TASK, task);
            startActivity(intent);
         });

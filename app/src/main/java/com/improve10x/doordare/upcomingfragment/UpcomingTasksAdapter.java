@@ -1,15 +1,19 @@
 package com.improve10x.doordare.upcomingfragment;
 
+import android.os.Handler;
 import android.text.Html;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.improve10x.doordare.OnEditActionListener;
 import com.improve10x.doordare.base.OnItemActionListener;
 import com.improve10x.doordare.base.task.Task;
 import com.improve10x.doordare.databinding.UpcomingTaskItemBinding;
+import com.improve10x.doordare.pendingfragment.PendingTaskViewHolder;
 import com.improve10x.doordare.utils.DateUtils;
 
 import java.text.SimpleDateFormat;
@@ -20,6 +24,7 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
 
     private List<Task> tasks;
     private OnItemActionListener onItemActionListener;
+    private OnEditActionListener onEditActionListener;
 
     void setTasks(List<Task> tasks) {
         this.tasks = tasks;
@@ -28,6 +33,10 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
 
     void setOnItemActionListener(OnItemActionListener onItemActionListener) {
         this.onItemActionListener = onItemActionListener;
+    }
+
+    void setOnEditActionListener(OnEditActionListener onEditActionListener) {
+        this.onEditActionListener = onEditActionListener;
     }
 
     @NonNull
@@ -48,6 +57,10 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         setTime(holder, task);
         holder.binding.getRoot().setOnClickListener(view -> {
             onItemActionListener.onItemClicked(task);
+        });
+        showEditBtn(holder);
+        holder.binding.editBtn.setOnClickListener(v -> {
+            onEditActionListener.onEdit(task);
         });
         setReducedTime(holder, task);
     }
@@ -76,5 +89,15 @@ public class UpcomingTasksAdapter extends RecyclerView.Adapter<UpcomingTaskViewH
         long diffInMillis = task.getDoItem().getDeadlineTimestamp() - currentTimeInMillis;
         String timeLeft = DateUtils.getAdvancedTimeLeftText(diffInMillis);
         holder.binding.reducedTimeTxt.setText(timeLeft + "left");
+    }
+
+    private void showEditBtn(UpcomingTaskViewHolder holder) {
+        holder.binding.getRoot().setOnLongClickListener(v -> {
+            holder.binding.editBtn.setVisibility(View.VISIBLE);
+            new Handler().postDelayed(() -> {
+                holder.binding.editBtn.setVisibility(View.GONE);
+            }, 3000);
+            return true;
+        });
     }
 }
